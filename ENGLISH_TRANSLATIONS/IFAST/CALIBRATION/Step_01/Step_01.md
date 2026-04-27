@@ -1,136 +1,134 @@
-**Étape 01 : Calibration des deux moteurs d'extrusion de Z1 et Z2**
+**Step 01: Calibrating the two extruder motors Z1 and Z2**
 
-Prérequis avant de continuer : Vous devez avoir validé [l'étape 00 Réglage de l'alignement des deux buses / calibrage XY](https://github.com/sudtek/IMPRIMANTES_3D/blob/main/QIDI/IFAST/CALIBRATION/Etape%2000/Etape_00.md)
+Prerequisite before continuing: You must have completed [Step 00 — Dual nozzle alignment / XY calibration](https://github.com/sudtek/IMPRIMANTES_3D/blob/main/QIDI/IFAST/CALIBRATION/Etape%2000/Etape_00.md)
 
-### Présentation
+### Overview
 
-Cette étape consiste à vérifier si les extrudeurs de la QIDI I-Fast consomment une longueur précise de filament conforme à la consigne du G-code, généralement 100 mm. Cette vérification nécessite au minimum un pied à coulisse ou une règle métallique de précision.
+This step involves verifying whether the QIDI I-Fast extruders consume the precise filament length specified by the G-code, typically 100mm. This check requires at minimum a caliper or a precision metal ruler.
 
-Si, en exécutant le G-code, chacun de vos extrudeurs consomme exactement 100 mm de filament, vous avez de la chance et n'avez rien à calibrer. Vous pouvez passer à l'étape suivante [Calibration Mise à niveau du plateau ](https://github.com/sudtek/IMPRIMANTES_3D/blob/main/QIDI/IFAST/CALIBRATION/Etape%2002/Etape_02.md).
+If, after running the G-code, each of your extruders consumes exactly 100mm of filament, you are lucky and have nothing to calibrate. You can move on to the next step: [Calibration — Bed leveling](https://github.com/sudtek/IMPRIMANTES_3D/blob/main/QIDI/IFAST/CALIBRATION/Etape%2002/Etape_02.md).
 
-Dans le cas contraire, si un ou les deux extrudeurs présentent une sur-extrusion ou une sous-extrusion, vous devrez calculer et définir les pas/mm pour chacun des moteurs extrudeurs E. Les cas de sur-extrusion et de sous-extrusion sont définis comme suit :
-- **Sur-extrusion** : Extrusion de 111 mm de filament pour une consigne initiale de 100 mm -> vous avez consommé plus de filament que prévu.
-- **Sous-extrusion** : Extrusion de 97 mm de filament pour une consigne initiale de 100 mm -> vous avez consommé moins de filament que prévu.
+Otherwise, if one or both extruders show over-extrusion or under-extrusion, you will need to calculate and set the steps/mm for each extruder motor E. Over-extrusion and under-extrusion are defined as follows:
+- **Over-extrusion**: 111mm of filament extruded for a target of 100mm → more filament consumed than expected.
+- **Under-extrusion**: 97mm of filament extruded for a target of 100mm → less filament consumed than expected.
 
-Cette procédure doit impérativement être effectuée chaque fois que vous remplacez ou changez la tête de votre QIDI I-Fast. Si vous conservez toujours la même tête, sauf en cas d'usure excessive ou d'autres problèmes, ces réglages ne devraient normalement pas changer dans le temps. En cas de doute, vous pouvez à tout moment revérifier en chargeant le G-code de calibration adapté avec des valeurs de températures adaptées en fonction de la matière de vos filaments.
+This procedure must be performed every time you replace or change the print head on your QIDI I-Fast. If you always keep the same head, these settings should not change over time unless there is excessive wear or other issues. If in doubt, you can re-verify at any time by running the appropriate calibration G-code with temperatures adjusted for your filament material.
 
-Par principe, on peut calibrer les pas des moteurs d'extrudeurs avec n'importe quel type de filament, peu importe la matière PLA, PETG...
+In principle, extruder motor steps can be calibrated with any type of filament, regardless of material — PLA, PETG, etc.
 
-Dans mon cas, j'utilise du PETG sur la tête de gauche nommée Z2 et du PLA sur la tête Z1. Le PETG me sert pour imprimer les corps de pièces, le PLA lui est utilisé pour les supports, ce qui facilite le retrait des supports après impression.
+In my case, I use PETG on the left head (Z2) and PLA on the right head (Z1). PETG is used to print the part bodies, while PLA is used for supports, which makes support removal easier after printing.
 
 ### Important
 
-Mon choix d'affecter le PETG à Z2 et le PLA à Z1 n'est pas arbitraire : Cette décision est "imposée" par mon slicer IdeaMaker, qui utilise une convention de référencement des têtes/buses particulière. Par conséquent, le profil de filament dominant pour imprimer un corps de pièce est la tête la plus à gauche dans IdeaMaker, ce qui correspond à Z2. Si vous n'utilisez pas IdeaMaker et que vous utilisez le logiciel slicer de QIDI (ou un autre), il se peut que vous ne soyez pas concerné par ce cas. Cependant, je ne peux pas en être certain puisque je n'utilise pas d'autres logiciels de slicing. Il vous incombe donc de vérifier et d'adapter le G-code en fonction de vos besoins.
+My choice of assigning PETG to Z2 and PLA to Z1 is not arbitrary: this decision is "imposed" by my slicer IdeaMaker, which uses a particular head/nozzle referencing convention. As a result, the dominant filament profile for printing a part body is the leftmost head in IdeaMaker, which corresponds to Z2. If you are not using IdeaMaker and instead use QIDI's own slicer (or another), this may not apply to you — however I cannot be certain of this since I do not use other slicing software. It is therefore your responsibility to verify and adapt the G-code to your own setup.
 
-Note : Si plus tard vous envisagez d'utiliser IdeaMaker, je vous recommande d'adopter les mêmes choix que moi ainsi vous pourrez directement utiliser mes profils IdeaMakers.
+Note: If you plan to use IdeaMaker in the future, I recommend making the same choices as me so that you can use my IdeaMaker profiles directly.
 
-Récapitulatif des paramètres pour la procédure de calibration des moteurs pas à pas des extrudeurs de ma QIDI IFAST :
+Summary of parameters for the extruder stepper motor calibration procedure on my QIDI IFAST:
 
 ```markdown
-| Extrudeur situé à main | Gauche | Droite |
-|------------------------|--------|--------|
-| Référence QIDI I-Fast  | Z2     | Z1     |
-| Matière                | PETG   | PLA    |
-| Température buse       | 235°C  | 205°C  |
-| Couleur filament       | Blanc  | Mauve  |
-| Débit d'écoulement     | 100%   | 100%   |
-| Longueur de calibrage  | 100 mm | 100 mm |
+| Extruder location    | Left   | Right  |
+|----------------------|--------|--------|
+| QIDI I-Fast ID       | Z2     | Z1     |
+| Material             | PETG   | PLA    |
+| Nozzle temperature   | 235°C  | 205°C  |
+| Filament color       | White  | Purple |
+| Flow rate            | 100%   | 100%   |
+| Calibration length   | 100mm  | 100mm  |
 ```
 
-Mon fichier gcode de calibrage [03_09_2024_RAZ_extrude_100mm.gcode](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode/03_09_2024_RAZ_extrude_100mm.gcode) se chargera d'extruder le filament les deux têtes de 100 mm l'une après l'autre et à aux température adéquates pour du PETG et du PLA.
+My calibration G-code file [03_09_2024_RAZ_extrude_100mm.gcode](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode/03_09_2024_RAZ_extrude_100mm.gcode) will extrude 100mm of filament from each head in sequence at the appropriate temperatures for PETG and PLA.
 
-Si vous voulez calibrer votre imprimante avec d'autres filaments et ou combinaisons (PLA/PLA, PETG/ABS ...),** il faudra télécharger le fichier gcode et l'adapter à votre situation des température attendues par la matière que vous avez choisi d'extruder**. Exemple de modification du gcode de mon programme pour avoir du PLA sur Z1 et Z2 à 205°C :
+If you want to calibrate your printer with other filaments or combinations (PLA/PLA, PETG/ABS, etc.), **you will need to download the G-code file and adapt the temperatures to match the material you have chosen to extrude**. Example modification for PLA on both Z1 and Z2 at 205°C:
 
 ```gcode
 ; ----------------------------------------------------
-; Fixer la température des deux buses
+; Set the temperature of both nozzles
 
-; Buse de gauche Z2 alias T1 pour du PLA à 205°C
+; Left nozzle Z2 alias T1 for PLA at 205°C
 M109 T1 S205
 
-; Buse de droite Z1 alias T0 pour du PLA à 205°C
+; Right nozzle Z1 alias T0 for PLA at 205°C
 M109 T0 S205
 
-; Note : M109 attend que la température de consigne soit atteinte avant de continuer -> ne pas remplacer par M104
+; Note: M109 waits for the target temperature to be reached before continuing → do not replace with M104
 ; ----------------------------------------------------
 ```
 
-Note : Pour cette opération, le plateau doit rester en bas, il est donc inutile de le faire chauffer, idem pour l'enceinte !
+Note: For this procedure, the bed should remain lowered — there is no need to heat it, nor the enclosure.
 
-P1) Charger deux bobines bien sèches et désydratées, prévoir 24 heures de désydratation, dans mon cas bobine de gauche type PETG blanc, bobine de droite type PLA mauve.
+P1) Load two well-dried and dehydrated spools (allow 24 hours of drying time). In my case: white PETG on the left, purple PLA on the right.
 
-P2) Ne pas installer les tubes de guidage PTFE bleu, au besoin les retirer car ils vous empêcheront de marquer et mesurer les longueurs de filaments.
+P2) Do not install the blue PTFE guide tubes — remove them if necessary, as they will prevent you from marking and measuring filament lengths.
 
-P3) Via le menu de la QIDI IFAST, déplacer la tête au centre du plateau XY, (ATTENTION ne jamais déplacer la tête à la main).
+P3) Using the QIDI IFAST menu, move the head to the center of the XY bed. (WARNING: never move the head by hand.)
 
-P4) À l'aide d'un réglé ou d'un pied à coulisse, mesurer précisément 100 mm sur chacun des filaments et dessiner une trace précise avec un feutre, soyez le plus précis possible, cela aura de l'influence. Réaliser une seconde trace à 200 mm de la tête. ATTENTION lorsque vous prendrez appui avec le réglé / pied à coulisse et qui risque de faire varier la mesure de quelques millimètres... Ces millimètres sont cruciaux donc faites attention et soyez le plus précis possible !
+P4) Using a ruler or caliper, precisely measure 100mm on each filament and mark a clear line with a marker — be as precise as possible, as it will affect the result. Make a second mark at 200mm from the head. WARNING: when resting the ruler or caliper against something, this may introduce a few millimeters of error. These millimeters matter, so take care and be as precise as possible.
 
-P5) Fixer manuellement la température de préchauffage des filaments, dans mon cas Z2 à 235°C et Z1 à 205°C. Bien que mon programme se charge de fixer ces valeurs et d'attendre qu'elles soient atteintes avant d'enchaîner, cette habitude vous évitera un jour d'extruder par erreur à trop basse température et détériorer une tête...
+P5) Manually set the preheat temperatures for the filaments — in my case Z2 to 235°C and Z1 to 205°C. Although my G-code handles this and waits for the target temperatures to be reached before proceeding, developing this habit will one day prevent you from accidentally extruding at too low a temperature and damaging a nozzle.
 
-P6) Exécuter le gcode [03_09_2024_RAZ_extrude_100mm.gcode](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode/03_09_2024_RAZ_extrude_100mm.gcode) . Z2 et Z1 vont monter en température et extruder tour à tour une longueur proche de 100 mm.
+P6) Run the G-code [03_09_2024_RAZ_extrude_100mm.gcode](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode/03_09_2024_RAZ_extrude_100mm.gcode). Z2 and Z1 will heat up and each extrude approximately 100mm in turn.
 
-P7) Mesurer la distance entre le 0 de référence (le collier non enfoncé) de la tête et le 1er trait pour Z2, idem pour Z1.
+P7) Measure the distance between the reference zero (the uninserted collar) on the head and the first mark for Z2, then repeat for Z1.
 
-**// Note : Ajouter une photo !**
+**// Note: Add a photo!**
 ![Simplon.co](http://blabla/maPhoto.png)
 
-Exemple de tests réalisés sur ma IFAST avec débit 100% pour 100 mm :
+Example test results on my IFAST at 100% flow rate for 100mm:
 
-- Gauche Z2 PETG 235°C et en sous-extrusion il reste +4 mm de filament.
-- Droite Z1 PLA 205°C et en sous-extrusion il reste +6.2 mm de filament.
+- Left Z2 PETG 235°C — under-extrusion: +4mm of filament remaining.
+- Right Z1 PLA 205°C — under-extrusion: +6.2mm of filament remaining.
 
-S'il reste quelques mm entre le colier et le trait mais que vous n'arrivez pas à mesurer voici l'astuce : Mesurer la distance entre le 0 de référence (le collier non enfoncé) de la tête et le second trait pour par exemple Z2 (idem pour Z1).
-Exemple :
+If there are only a few mm left between the collar and the mark but you cannot measure it easily, here is a tip: measure the distance between the reference zero (the uninserted collar) and the second mark for Z2 (same for Z1).
+Example:
 
-- Extrudeur de gauche Z2 PETG 235°C sous-extrusion la longueur de filament restante jusqu'au second trait est de +101.5 mm soit (200-101.5) = +98.5 mm  ... cela vous evitera de galérer et vous contortionner ;)  
-  
-P8) Appliquer la formule suivante pour calculer les nouveaux E de Z2 et Z1 :
-- Extrudeur de gauche Z2 PETG 235°C sous-extrusion reste de +4 mm -> (200-104)=96mm -> 96*0.0073/100 = 0.0070
-- Extrudeur de droite Z1 PLA 205°C sous-extrusion reste de +6.2 mm -> (200-106.2)= 93.8mm -> 93.8*0.0073/100 = 0.0068
+- Left extruder Z2 PETG 235°C — under-extrusion: remaining filament length to the second mark is +101.5mm, so (200 - 101.5) = 98.5mm extruded. This will save you the trouble of contorting yourself to get a reading.
 
-### Le cas particulier de la sur-extrusion :
+P8) Apply the following formula to calculate the new E steps/mm for Z2 and Z1:
+- Left extruder Z2 PETG 235°C — under-extrusion, +4mm remaining → (200 - 104) = 96mm → 96 × 0.0073 / 100 = 0.0070
+- Right extruder Z1 PLA 205°C — under-extrusion, +6.2mm remaining → (200 - 106.2) = 93.8mm → 93.8 × 0.0073 / 100 = 0.0068
 
-Si le 1er trait à 100mm est sous le colier le plus simple est de réinitialiser aux valueurs d'orrigines et vous vous retrouverez à nouveau en sous extrusion. 
+### Special case — over-extrusion
+
+If the first 100mm mark is below the collar, the simplest fix is to reset to factory default values, which will put you back into under-extrusion.
 
 ```gcode
-; QIDI IFAST : T0 = buse de droite = Z1 = S
-; QIDI IFAST : T1 = buse de gauche = Z2 = P
+; QIDI IFAST: T0 = right nozzle = Z1 = S
+; QIDI IFAST: T1 = left nozzle = Z2 = P
 
 M8011 S0.0073 P0.0073
 ```
-Télécharger le fichier [09_09_2024_RESTORE_DEFAUT_E_Z1Z2.gcode](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode/09_09_2024_RESTORE_DEFAUT_E_Z1Z2.gcode)
+Download the file [09_09_2024_RESTORE_DEFAUT_E_Z1Z2.gcode](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode/09_09_2024_RESTORE_DEFAUT_E_Z1Z2.gcode)
 
-Lancer l'impression du gcode, faites un reboot de l'imprimante et reprendre à la phase P04).
+Run the G-code, reboot the printer, and return to step P04.
 
 -----------------
 
-### Sauvegarder la nouvelle valeur dans le firmware de la QUIDI IFAST :
+### Saving the new values to the QIDI IFAST firmware
 
-Pour remplacer et sauvegarder les nouvelles valeurs afin de définir les nouveaux pas/mm pour E correspondant à votre Z1 et Z2 il sufit de copier le bout de code suivant et remplacer par vos valeurs, le sauvegarder sous un nom de fichier explicite exemple "JJ_MM_AAAA_SAVNEW_Pas_E_Z1Z2.gcode" et l'executer en l'imprimant sur la QIDI IFAST, cela prendra 1 seconde. 
+To replace and save the new steps/mm values for E on your Z1 and Z2, copy the following code snippet, replace the values with your own, save it under a descriptive filename such as "DD_MM_YYYY_SAVNEW_Steps_E_Z1Z2.gcode", and run it by printing it on the QIDI IFAST — it will complete in about 1 second.
 
 ```gcode
-; QIDI IFAST : T0 = buse de droite = Z1 = S
-; QIDI IFAST : T1 = buse de gauche = Z2 = P
+; QIDI IFAST: T0 = right nozzle = Z1 = S
+; QIDI IFAST: T1 = left nozzle = Z2 = P
 
 M8011 S0.0068 P0.0070
 ```
-Télécharger le fichier [09_09_2024_SAV_NEW_E_Z1Z2.gcode](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode/09_09_2024_SAV_NEW_E_Z1Z2.gcode)
+Download the file [09_09_2024_SAV_NEW_E_Z1Z2.gcode](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode/09_09_2024_SAV_NEW_E_Z1Z2.gcode)
 
 -----------------
 
-### Vérification de la bonne prise en compte des nouvelle valeur du firmware de la QUIDI IFAST :
+### Verifying that the new firmware values have been applied correctly
 
-Aprés mise à jour, 
+After updating:
 
-- Redémarez / rebootez votre IFAST.
+- Restart / reboot your IFAST.
 
-- Vérifiez que les nouvelles valeurs de S & P permette l'extrusion conforme de de 100mm sur les des deux buses. [09_09_2024_VERIF_Z1Z2_extruder_100mm.gcode](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode/09_09_2024_VERIF_Z1Z2_extruder_100mm.gcode)
-- Si aprées extrusion le 1er trait 100mm est bien au niveau du collier l'extrusion de votre machine est parfaitement calibrée pour les deux buses et avez totalement validé cette étape.
+- Verify that the new S & P values result in correct 100mm extrusion from both nozzles using: [09_09_2024_VERIF_Z1Z2_extruder_100mm.gcode](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode/09_09_2024_VERIF_Z1Z2_extruder_100mm.gcode)
+- If after extrusion the first 100mm mark lines up with the collar, your machine's extrusion is perfectly calibrated for both nozzles and this step is fully complete.
 
 -----------------
 
-Tous les gcodes de calibration de E sont disponibles: [Ici](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode)
+All E calibration G-code files are available [here](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode).
 
-_Note #1 Important pour les utilisateurs Ideamaker, dans le profil de l'imprimante Ideamaker intégre une variable nommée: **step E / mm = 0.00** ; par defaut elle vaut 0.00 si vous changez cette valeur alors Ideamaker ne tiendra pas compte de notre calibrage et appliquera la valeur au deux moteurs d'extrusion ... donc assurez-vous que dans le profil imprimante Ideamaker votre variable nommée vaut 0.00 ! **step E / mm = 0.00**_. Cette variable est un option acceptable si et seulement si vous avez un seul moteur d'extrusion E !
-
-
+_Note #1: Important for IdeaMaker users — the IdeaMaker printer profile includes a variable named **step E / mm = 0.00**. By default it is set to 0.00. If you change this value, IdeaMaker will override your calibration and apply that value to both extruder motors — so make sure this variable is set to 0.00 in your IdeaMaker printer profile: **step E / mm = 0.00**. This variable is only acceptable if you have a single extruder motor E._

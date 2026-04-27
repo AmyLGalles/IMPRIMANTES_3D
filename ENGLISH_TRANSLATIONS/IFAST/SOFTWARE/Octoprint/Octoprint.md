@@ -1,30 +1,29 @@
-**Instructions pour Utiliser OctoPrint avec l'Imprimante Qidi I-Fast**
+**Instructions for Using OctoPrint with the Qidi I-Fast Printer**
 
-**Date : 25 août 2024**
+**Date: August 25, 2024**
 
-Spécifications de l'Imprimante Qidi I-Fast :
-- **Modèle** : QIDI TECHNOLOGY I-Fast 3D Printer
-- **Extrudeurs** : Double
-- **Volume d'Impression** : 360×250×320mm
+Qidi I-Fast Printer Specifications:
+- **Model**: QIDI TECHNOLOGY I-Fast 3D Printer
+- **Extruders**: Dual
+- **Print Volume**: 360×250×320mm
 
-Ces instructions vous permettront de configurer OctoPrint avec votre imprimante Qidi I-Fast.
-Assurez-vous de suivre chaque étape avec précaution hors tension pour éviter tout dommage aux composants internes de l'imprimante.
+These instructions will allow you to configure OctoPrint with your Qidi I-Fast printer.
+Make sure to follow each step carefully with the printer powered off to avoid any damage to the printer's internal components.
 
-Pour utiliser le logiciel OctoPrint avec l'imprimante Qidi I-Fast, il est nécessaire d'ajouter un dongle USB vers un port série (VCC; RX; TX; GND), car l'imprimante n'est pas équipée d'origine d'un port USB. Voici les étapes à suivre :
+To use OctoPrint with the Qidi I-Fast printer, it is necessary to add a USB-to-serial dongle (VCC; RX; TX; GND), as the printer does not come equipped with a USB port from the factory. Here are the steps to follow:
 
-1. **Retirer le Panneau de Droite** :
-   - Démontez le panneau de droite de l'imprimante pour accéder aux composants internes.
+1. **Remove the Right Panel**:
+   - Disassemble the right panel of the printer to access the internal components.
 
-2. **Localiser le Connecteur Série** :
-   - Identifiez le connecteur série à l'intérieur de l'imprimante. Il existe deux ports série, Attention Qidi recommande de connecter le dongle USB au port situé à proximité immédiate du module Wi-Fi.
-![Le PCB en question est celui visible sur la photo de droite :](https://github.com/sudtek/IMPRIMANTES_3D/blob/main/QIDI/IFAST/LOGICIELS/Octoprint/PCB_serial.png)
+2. **Locate the Serial Connector**:
+   - Identify the serial connector inside the printer. There are two serial ports — note that QIDI recommends connecting the USB dongle to the port located immediately adjacent to the Wi-Fi module.
+![The PCB in question is the one visible in the photo on the right:](https://github.com/sudtek/IMPRIMANTES_3D/blob/main/QIDI/IFAST/LOGICIELS/Octoprint/PCB_serial.png)
 
-3. **Connecter le Dongle USB** :
-   - Branchez le dongle USB au connecteur série identifié.
-   - Utilisez une rallonge USB pour faciliter la connexion et l'accessibilité.
-  
-4. **Installer Octoprint** :
-   Je ne rentrerai pas dans les details pour vous expliquer comment installer Octoprint ce n'est pas l'objet de ce md; il ya de nombreuses videos qui traitent de ce sujet en profondeur ...  mais  si vous avez plusieurs imprimante 3D je vous recommande d'installer Octoprint en "multi instance" vous pourrez ainsi contrôler plusieurs imprimantes indépandement sans risque d'interferénce et sans avoir besoin d'affecter une machine par imprimante.
-   
-6. **Note à propos de l'interfacage entre Octoprint et la QIDI IFAST :** Il semble que le firmware de la QIDI IFAST n'est pas totalement pris en charge par Octoprint cela signifie que vous pouvez piloter la QIDI IFAST avec les commandes basiques depuis l'interface web d'Octoprint, exemple : fixer la temperature d'une buse, du beb, bouger la tête, lancer votre impression ... mais certaines fonction propre à l'imprimante seront désactivés et/ou inutilisables voir sans boucle de retour / rétroaction ... Je trouve dommage que QIDI n'accorde pas plus d'interet à un produit comme Octoprint qui unifie les interfaces de controle des imprimantes 3D ... Je pense que c'est une grave erreur commerciale qui coutera très cher à long terme à tous les constructeurs qui ont cette politique de segmentation esperant rendre captif les clients ... 
+3. **Connect the USB Dongle**:
+   - Plug the USB dongle into the identified serial connector.
+   - Use a USB extension cable to make the connection easier and more accessible.
 
+4. **Install OctoPrint**:
+   I won't go into detail here about how to install OctoPrint — that's not the purpose of this document, and there are many videos that cover the topic in depth. However, if you have multiple 3D printers, I recommend installing OctoPrint in "multi-instance" mode, which lets you control several printers independently without risk of interference and without needing a dedicated machine per printer.
+
+5. **Note on the OctoPrint / QIDI I-Fast Interface**: It appears that the QIDI I-Fast firmware is not fully supported by OctoPrint. This means you can control the QIDI I-Fast using basic commands from the OctoPrint web interface — for example: setting a nozzle or bed temperature, moving the print head, starting a print — but certain printer-specific functions will be disabled and/or unusable, some without any feedback loop. I find it a shame that QIDI doesn't show more interest in a product like OctoPrint, which unifies 3D printer control interfaces. I believe this is a serious commercial mistake that will cost all manufacturers who pursue this kind of customer lock-in strategy dearly in the long run.

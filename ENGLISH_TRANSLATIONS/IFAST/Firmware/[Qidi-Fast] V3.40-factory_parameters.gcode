@@ -1,461 +1,453 @@
-
-
 M8513
 ;
-;断电保存支持与否
-;I1表示支持，I0表示不支持,设置完后重启才生效
+; Power-loss recovery support
+; I1 = enabled, I0 = disabled. Restart after changing for it to take effect.
 M8000 I1
 ; ==================================
 ;
-;打印关机支持与否
-;I1表示支持，I0表示不支持,设置完后重启才生效
+; Shutdown after print support
+; I1 = enabled, I0 = disabled. Restart after changing for it to take effect.
 M8001 I1
 ; ==================================
 ;
-;下面是步进电机方向控制，I1与I-1的方向刚好相反，所以，如果电机方向不对，要么改接线，要么改这个方向参数
-;X步进电机方向，I1或I-1
-M8002 I-1 
+; Stepper motor direction control. I1 and I-1 are opposite directions.
+; If a motor runs the wrong way, either rewire it or change this parameter.
+; X stepper motor direction: I1 or I-1
+M8002 I-1
 ; ==================================
 ;
-;
-;Y步进电机方向
-M8003 I-1 
+; Y stepper motor direction
+M8003 I-1
 ; ==================================
 ;
-;
-;Z步进电机方向
+; Z stepper motor direction
 M8004 I1
 ; ==================================
 ;
-;
-;E步进电机方向
-M8005 I1 
+; E stepper motor direction
+M8005 I1
 ; ==================================
 ;
-;
-;设置第二个E步进电机方向,I1 E2或I-1 E2 ，如果没有多喷头，请忽略此配置
-M8005 I1 E2 
+; Second E stepper motor direction: I1 E2 or I-1 E2
+; Ignore if you do not have a multi-nozzle setup.
+M8005 I1 E2
 ; ==================================
 ;
-;
-;设置第三个E步进电机方向,I1 E3或I-1 E3，如果没有多喷头，请忽略此配置，三喷头目前只支持三进一出
-M8005 I1 E3 
+; Third E stepper motor direction: I1 E3 or I-1 E3
+; Ignore if you do not have multiple nozzles. Three-nozzle setups only support three-in-one-out.
+M8005 I1 E3
 ; ==================================
-;XYZ轴挤出头/平台移动配置,仅仅会影响手动界面按钮的实际运动方向
-;0:X轴方向 挤出头运动        1:X轴方向 平台运动 
-;目前市面上的机器，大部分都是X轴挤出头运动
-M8005 X0 
-; ==================================
-;
-;0:Y轴方向 挤出头运动        1:Y轴方向 平台运动
-;目前I3的结构Y轴是平台运动，delta,ultimaker和makerbot的Y轴是挤出头运动
-M8005 Y0 
+; XYZ axis print head / platform movement configuration.
+; Only affects manual button movement direction on the touchscreen.
+; 0: X axis = print head movement    1: X axis = platform movement
+; Most machines use print head movement on the X axis.
+M8005 X0
 ; ==================================
 ;
-;0:Z轴方向 挤出头运动        1:Z轴方向 平台运动 
-;目前I3结构和delta结构Z轴是挤出头移动，ultimaker和makerbot结构Z轴是平台移动
+; 0: Y axis = print head movement    1: Y axis = platform movement
+; I3 structure printers use platform movement on Y; delta, Ultimaker, and Makerbot use print head movement.
+M8005 Y0
+; ==================================
+;
+; 0: Z axis = print head movement    1: Z axis = platform movement
+; I3 and delta structure printers use print head movement on Z; Ultimaker and Makerbot use platform movement.
 M8005 Z1
 ; ==================================
 ;
-;速度相关设置，速度以mm/s为单位，加速度以mm/s^2为单位
-;最大的起步速度，当运动速度起过此速度的时候，会以此速度作为起步，此速度主要是防止失步，此值过小，会在打圆的时候造成轨角凸起
-M8006 I80			;----GAM-----I80---I120		
+; Speed settings — speed in mm/s, acceleration in mm/s²
+; Maximum start speed. When movement speed exceeds this value, this speed is used as the starting speed.
+; Prevents loss of steps. If too low, causes corner bulging when printing cylinders.
+M8006 I80           ;----GAM-----I80---I120
 ; ==================================
 ;
-;最大的轨弯速度值(对应开源固件中的jerk速度)，如果运动的实际轨弯速度大于此值，会强制令运动减速。
-;在打填充时，会有大量往复运动，此值大，噪音大，容易丢步。此值小，速度慢，打印速度高的时候，打印质量会相对较差
-M8007 I15			;----GAM--------I25
+; Maximum cornering speed (equivalent to jerk speed in open-source firmware).
+; If actual cornering speed exceeds this value, motion is forced to decelerate.
+; High value = more noise and lost steps during infill.
+; Low value = slower speed; print quality may suffer at high speeds.
+M8007 I15           ;----GAM--------I25
 ; ==================================
 ;
-;
-;加速度,该值越大，实际运行的平均速度越大，但是噪音也大，该值小，实际的速度也会越小
-M8008 I1000			;----GAM-------I1100-I600
+; Acceleration. Higher value = faster average print speed but more noise. Lower value = slower actual speed.
+M8008 I1000         ;----GAM-------I1100-I600
 ; ==================================
 ;
-;机器相关参数,参数设置完，请打印一个立方体，然后用尺子量一下尺寸，以确认参数没有问题
-;XY每一步的mm值，如20齿，齿距为2.032mm,1.8度步进电机，16细分，则为(20*2.032)/((360/1.8)*16)
-M8009 S0.01061083 
+; Machine parameters. After setting, print a cube and measure it to confirm accuracy.
+; XY steps per mm. Example: 20-tooth pulley, 2.032mm pitch, 1.8° motor, 16 microsteps = (20×2.032)/((360/1.8)×16)
+M8009 S0.01061083
 ; ==================================
 ;
-;
-;如果需要独立设置X,Y步进电机参数，可以用这个指令(前面框内打勾即可)
-;M8009 X0.010625  Y0.010625 
+; To set X and Y stepper parameters independently, use this command:
+;M8009 X0.010625 Y0.010625
 ; ==================================
 ;
-;
-;Z每一步的mm值,计算公式:导程/((360/1.8)*16),导程为螺杆转一圈平台上升的高度
+; Z steps per mm. Formula: lead pitch / ((360/1.8)×16)
+; Lead pitch = height the platform rises per full screw revolution.
 M8010 S0.0025
 ; ==================================
 ;
-;E每一步的mm值,这个值等于挤出齿轮的周长除以3200，如果有减速装置还需除以减速比，
-;如果你发现设置出丝比较稀，或是经常断层，建议将此值设置得比真实值小一点，出丝更好
+; E steps per mm. Equal to the circumference of the extrusion gear divided by 3200.
+; If a reduction drive is present, also divide by the reduction ratio.
+; If extrusion is sparse or layers are missing, try setting this slightly lower than the calculated value.
 M8011 S0.0073 P0.0073
 ; ==================================
 ;
-;各种参数的速度最大值，为了保证机器能够稳定，请根据实测结果进行设置
-;XY运动的最大速度mm/s
-M8012 I200			;----GAM--------
+; Maximum speeds. Adjust based on actual test results to ensure machine stability.
+; Maximum XY speed (mm/s)
+M8012 I200          ;----GAM--------
 ; ==================================
 ;
-;
-;Z运动的最大速度mm/s
-M8013 I10			;----GAM------I5--I25
+; Maximum Z speed (mm/s)
+M8013 I10           ;----GAM------I5--I25
 ; ==================================
 ;
-;
-;挤出机的最大速度mm/s
-M8014 I120			;----GAM--------I120
+; Maximum extruder speed (mm/s)
+M8014 I120          ;----GAM--------I120
 ; ==================================
 ;
-;Z归零速度,makerware切片软件切片，会忽略这个归零速度，因为其gcode中有指定归零速度
-;Z归零时的第一次归零速度，速度较快
+; Z homing speed. MakerWare slicing software ignores this and uses its own homing speed from the G-code.
+; First Z homing speed (faster pass)
 M8015 I8
 ; ==================================
 ;
-;
-;XY归零时的第一次归零速度，速度较快
+; First XY homing speed (faster pass)
 M8015 S30
 ; ==================================
 ;
-;
-;Z归零时的第二次归零速度，速度较慢
+; Second Z homing speed (slower pass)
 M8016 I4
 ; ==================================
 ;
-;
-;XY归零时的第二次归零速度，速度较慢
+; Second XY homing speed (slower pass)
 M8016 S5
 ; ==================================
 ;
-;打印前的预挤出
-;预挤出长度mm，第一层与底板是否粘牢直接影响打印质量，多一点预挤出会使底板粘得更好
+; Pre-extrusion before printing.
+; Pre-extrusion length (mm). First-layer adhesion directly affects print quality.
+; More pre-extrusion improves bed adhesion.
 M8017 I1
 ; ==================================
 ;
-;
-;挤出机的最大预挤出速度mm/s,非减速齿轮送料，最大速度通常都在100以上，
-M8018 I20			;----GAM------I20--I80
+; Maximum pre-extrusion speed (mm/s). For non-geared (direct drive) feeders, maximum speed is usually above 100.
+M8018 I20           ;----GAM------I20--I80
 ; ==================================
-;下面的两个参数和与Replicator/Makerware软件兼容密切相关，如果不打算兼容该类软件，可以不用管
-;支持的最大退丝速度,单位是mm/s，
-;当为0时，表示与E最大速度相同。默认Makerware双头切片退丝非常慢，退丝停顿时间非常长
-M8019 I50			;----GAM-----I100--I50-I0
-; ==================================
-;
-;退丝长度,mm，回抽距离，回抽过小会漏丝，回抽过大，停顿时间过长，也容易漏丝，
-;请根据您的送料类型及挤出头类型合理设置，如果为0，退丝长度遵从切片软件
-M8020 S0			;----GAM--------S0
+; The following two parameters relate to Replicator/Makerware software compatibility.
+; If you are not using that software, these can be left alone.
+; Maximum retraction speed (mm/s).
+; When 0, uses the same value as maximum E speed.
+; Default Makerware dual-head slicing retracts very slowly with long pause times.
+M8019 I50           ;----GAM-----I100--I50-I0
 ; ==================================
 ;
-;makerware软件切换挤出头时的退丝长度,makerware切片指定退丝非常长，再回挤时容易卡丝,
-;如果为零，遵从切片软件设置
+; Retraction length (mm). Too little = oozing. Too much = long pauses and still oozing.
+; Set according to your feeder type and extruder type.
+; If 0, retraction length follows the slicing software setting.
+M8020 S0            ;----GAM--------S0
+; ==================================
+;
+; Retraction length when Makerware switches extruders.
+; Makerware specifies very long retractions which can cause jams on re-extrusion.
+; If 0, follows slicing software settings.
 M8033 S0
 ; ==================================
 ;
-;设置机器使用的默认耗材直径,单位是mm
-;耗材直径
-M8021 S1.75 
+; Default filament diameter (mm)
+M8021 S1.75
 ; ==================================
-;挤出头最高温度
-;挤出头支持的最高温度，设置此温度为了防止用户误操作挤出头温度造成挤出头损坏, 
-;热阻只能到260度，peek管也大概在260度开始软化
-M8022 I350 
-; ==================================
-;
-;【耗材界面,出丝的最低温度】
-;耗材界面，挤出耗材所需的最低温度
-M8022 T230 
+; Maximum extruder temperature.
+; Set to prevent accidental overheating and damage to the extruder.
+; Thermal resistance limit is ~260°C; PEEK tube begins softening at ~260°C.
+M8022 I350
 ; ==================================
 ;
-;热床最高温度
-;热板最高温度，温度过高容易损坏热板
-M8023 I120 
-; ==================================
-;强烈建议不要禁止此功能
-;禁止温度出错检测，默认的温度出错检测会在温度传感器未插好或是加热功率过小的时候弹出警告
-;0: 使能温度检测      1:禁止挤出头和热床温度出错检测       2:仅禁止热床的温度出错检测 
-M8023 T0 
+; Filament interface — minimum extrusion temperature.
+; Minimum temperature required to extrude filament on the filament interface.
+M8022 T230
 ; ==================================
 ;
-;热腔最高温度
-;热腔最高温度，温度过高容易损坏热板
-M8023 C80 
+; Maximum heated bed temperature.
+; Excessive temperature may damage the heat bed.
+M8023 I120
 ; ==================================
-;X，Y，Z最大行程，请根据实际打印尺寸进行设置，单位是mm      请务必认真设置此参数！！！！！！如果设置过小，在打印时，超出设置
-;行程的地方则无法打印，如果设置过大，则在切片移动指令超出实际机器行程的情况下，不会对超出的位置进行限制，会使得电机强制撞机
-;X最大行程,在lcd使能声音的情况下，超出行程的运动会造成蜂鸣器鸣叫
+; It is strongly recommended NOT to disable this feature.
+; Temperature error detection. Triggers a warning when the temperature sensor is not connected or heating power is too low.
+; 0: Enable temperature detection    1: Disable error detection for extruder and bed    2: Disable bed error detection only
+M8023 T0
+; ==================================
+;
+; Maximum heated enclosure temperature.
+; Excessive temperature may damage the heat bed.
+M8023 C80
+; ==================================
+; Maximum travel for X, Y, Z axes (mm). Set according to actual print volume. THIS PARAMETER IS CRITICAL!!!!!!
+; Too small = areas beyond the limit cannot be printed.
+; Too large = no restriction if slice commands exceed machine travel, risking motor crash.
+; X maximum travel. If LCD sound is enabled, movement beyond travel triggers a buzzer.
 M8024 I372.5
 M8024 T4
 ; ==================================
 ;
-;
-;Y最大行程
+; Y maximum travel
 M8025 I250
 ; ==================================
 ;
-;
-;Z最大行程 
+; Z maximum travel
 M8026 I322
 ; ==================================
 ;
-;【设置挤出头个数】最少1个，目前最多3个,3喷头情况下只支持三进一出
-;配置挤出头个数
+; Number of extruders. Minimum 1, maximum 3.
+; Three-nozzle setups only support three-in-one-out.
 M8027 I2
 ; ==================================
 ;
-;【是否是多进一出喷头】，多进一出的喷头共用一个温度传感器，共用一个加热棒
-; 0:非多进一出        1:多进一出
-M8027 S0 
+; Multi-in-one-out nozzle. These nozzles share a single temperature sensor and heating element.
+; 0: Standard (not multi-in-one-out)    1: Multi-in-one-out
+M8027 S0
 ; ==================================
-;【多Y或多Z的特殊功能】
-;如果使能该功能，于前面的框内打勾即可
-;0:双Z双限位模式，第二个限位接X+,   	1:双Z单限位模式，只需要接一个限位开关   	3:三Z模式，第三个Z轴接ext扩展口. 
-M8027 Z0 
-; ==================================
-;       
-;
-;第二个挤出头E2当成Y来使用,如果使能该功能，于前面的框内打勾即可
-;M8027 Y0 
+; Multi-Y or multi-Z special function. Enable by ticking the box in front.
+; 0: Dual Z, dual limit switches — second limit connected to X+
+; 1: Dual Z, single limit switch — only one limit switch required
+; 3: Triple Z — third Z axis connected to the EXT expansion port
+M8027 Z0
 ; ==================================
 ;
-;第二个挤出头E2当成第一个挤出头E1来使用
-;如果使能该功能，于前面的框内打勾即可
-;M8027 E0 
+; Use second extruder E2 as Y axis. Enable by ticking the box in front.
+;M8027 Y0
 ; ==================================
 ;
-;有些机器会希望禁止热床，可能通过该指令禁止热床
-;1：使能热床           0：禁止热床
-M8027 T1 
+; Use second extruder E2 as first extruder E1. Enable by ticking the box in front.
+;M8027 E0
 ; ==================================
-;
-;高级设置
-;退丝补偿，机器，退丝后再挤出，因为弹性作用，其实会比原位置退一点点，如果不懂就直接为零
-M8028 S0.00
+;
+; Enable or disable the heated bed.
+; 1: Enable    0: Disable
+M8027 T1
 ; ==================================
-;【XY轴限位开关位置类型】   ;0: 单边零点限位(左前)，如mendel,i3...    1: 单边最大点限位(右后)，如makerbot机型
-; 2：双边限位，如ultimaker机型,mini板只XYZ三个限位，不要配置成使用此选项 
-; 3: 左后方限位(极少)        4：右前方限位(极少)
-M8029 I0 
+;
+; Advanced settings.
+; Retraction compensation. After retraction and re-extrusion, elasticity causes a slight extra retraction.
+; Leave at 0 if unsure.
+M8028 S0.00
 ; ==================================
-;【XYZ限位开关接线类型】如果此配置错误，在手动界面操作电机时，在某个方向电机会无法运动而且蜂鸣器会发出滴滴的声音。简单的判断方法，
-; 如果配置正常，由未限位变成限位时，蜂鸣器会发出滴滴声，而由限位变成未限位时,蜂鸣器不会发声 .如果发现现象相反，将此配置修改一下即可
-; 0: 限位开关常开(未限位时-和s电压为高电平，限位时为低电平)             1: 限位开关常闭(未限位时-和s电压为低电平，限位时为高电平)
-M8029 T0 
+; XY limit switch position type.
+; 0: Single-side zero limit (front left) — e.g. Mendel, i3
+; 1: Single-side maximum limit (rear right) — e.g. Makerbot
+; 2: Bilateral limit — e.g. Ultimaker (mini board has only 3 XYZ limits; do not use this option)
+; 3: Rear left limit (rare)    4: Front right limit (rare)
+M8029 I0
 ; ==================================
-;【Z轴限位开关位置】
-;0：挤出头离平台最近时限位,限位接Z-
-;1：挤出头离平台最远时限位,限位接Z+
+; XYZ limit switch wiring type. If configured incorrectly, the motor will be unable to move in one direction and the buzzer will sound.
+; Simple check: buzzer sounds when limit is triggered; silent when released. If reversed, change this parameter.
+; 0: Normally open (high when not triggered, low when triggered)
+; 1: Normally closed (low when not triggered, high when triggered)
+M8029 T0
+; ==================================
+; Z axis limit switch position.
+; 0: Triggered when extruder is closest to the bed — limit connected to Z-
+; 1: Triggered when extruder is farthest from the bed — limit connected to Z+
 M8029 S1
 ; ==================================
-;【XYZ轴归位后是否回(0,0,0)，仅限XYZ或hbot机型】
-;0 :回XYZ(0,0,0)位置，即挤出头回到平台左前方的位置
-;1 :停留在限位位置
+; Whether XYZ axes return to (0,0,0) after homing. XYZ and H-bot machines only.
+; 0: Return to (0,0,0) — print head moves to front-left of the bed
+; 1: Stay at the limit position
 M8029 C1
 ; ==================================
 ;
-;【断料检测使能】断料检测使能,断料限位接的是对应喷头的限位接口，即E1和E2接口
-;0:禁止断料检测			1:使能断料检测
-M8029 D1 
+; Filament runout sensor. Limit connected to the corresponding extruder limit port (E1 or E2).
+; 0: Disable    1: Enable
+M8029 D1
 ; ==================================
 ;
-;断料检测E1和E2接口的限位类型配置
-;;1:与XYZ限位类型相同          -1:与XYZ限位类型相反
+; Filament runout sensor limit switch type for E1 and E2 ports.
+; 1: Same type as XYZ limits    -1: Opposite type to XYZ limits
 M8029 E-1
-M8029 P-1 
+M8029 P-1
 ; ==================================
-;【喷头风扇控制】 此风扇对模型散热，建议设置风扇启动关闭由切片软件指定
-;>0: 如果需要强制挤出机大于某温度时自动开启风扇，设置一个大于0的温度.
-; 0: 如果设为0,风扇开头由切片软件控制
-M8030 I0 
+; Part cooling fan control. This fan cools the printed model.
+; Recommended: let the slicer control fan on/off.
+; >0: Fan turns on automatically when extruder exceeds this temperature.
+;  0: Fan controlled by slicing software.
+M8030 I0
 ; ==================================
-;【M8030 I50 T-1 】
-;【喉管风扇控制】 此风扇对喷头喉管散热， 设置自启动温度一定要放在M8030 I0命令之后，
-;I后面的参数表示温度，当为0是，表示主板风扇不会随温度变化，否则当挤出头温度达到指定温度时，风扇会开启
-M8030 I50 T-1 
+; Hotend throat (heatsink) fan control. This fan cools the nozzle throat.
+; Auto-start temperature must be set after the M8030 I0 command.
+; Value after I = threshold temperature. At 0: fan does not respond to temperature.
+; Otherwise: fan turns on when extruder reaches the specified temperature.
+M8030 I50 T-1
 ; ==================================
 ;
-;【设置第二个挤出头(右边挤出头)的偏移】单位是mm,如果是单头，下列两参数无效,cura中双头偏移设置成0
-;X方向的偏移(左右)
+; Second extruder (right extruder) offset (mm). Ignored for single-extruder setups.
+; In Cura, set dual extruder offset to 0.
+; X direction offset (left/right)
 M8031 S-35
 ; ==================================
 ;
-;
-;Y方向的偏移(前后)
-M8032 S0 
+; Y direction offset (front/rear)
+M8032 S0
 ; ==================================
 ;
-;SD卡是否支持文件夹的显示
-;0:不支持               1：支持
-M8034 I1 
+; SD card folder support.
+; 0: Not supported    1: Supported
+M8034 I1
 ; ==================================
-;【调平测试点】 最多可以取5个点，X,Y为浮点数，如果X,Y都小于1，则表示相对行程的比例，否则表示为X,Y的绝对坐标值，单位为mm
-; 如果行程为(200,200),则M8036 X0.1 Y0.1与 M8036 X20 Y20是一样的效果, 如果绝对值数值小于1,表示是比较，否则是绝对坐标 
-; 调平点个数，
-M8035 I3 
+; Leveling test points. Up to 5 points. X and Y are floating-point numbers.
+; If both X and Y are less than 1, values are treated as proportions of total travel.
+; Otherwise treated as absolute coordinates in mm.
+; Example: with 200×200 travel, M8036 X0.1 Y0.1 equals M8036 X20 Y20.
+; Number of leveling points:
+M8035 I3
 ; ==================================
 ;
-;在XYZ手动调平和三角洲调平测试中，有多少个点，就有多少个该指令,如果是三角洲自动调平，
-;第一个点的位置是传感器离喷头中心的距离（右后为正），其他点参数无效
+; One M8036 command per leveling point for manual XYZ and delta leveling tests.
+; For delta auto-leveling, only the first point is used — it represents the sensor offset
+; from the nozzle center (positive = rear right). Other points are ignored.
 M8036 X10 Y10
 ; ==================================
-;
-;
-;
 M8036 X320 Y10
 ; ==================================
-;
-;
-;
 M8036 X165 Y240
 ; ==================================
-;
-;
-;
 M8036 X0.2 Y0.8
 ; ==================================
-;【热阻类型】温度传感器类型,对于热电阻，同样参数的热电阻其实也略有差别,不同的热电阻在低温时温度比较接近，在高温时，
-; 显示的温度差别可达40度，如果是热电阻,请务必设置正确的热电阻类型，         0: 理想NTC 100K 1% 3950 B 
-; 1: K型热电偶           2: EPCOS NTC 100K 1% 3950 B,对应marlin的传感器类型1 ,市面上绝大多数都是这种
+; Temperature sensor type. Please set the correct type.
+; Readings can differ by up to 40°C depending on sensor type.
+; 0: Ideal NTC 100K 1% 3950 B thermistor
+; 1: K-type thermocouple
+; 2: EPCOS NTC 100K 1% 3950 B — equivalent to Marlin sensor type 1; most common on the market
 M8081 I1
 ; ==================================
-;【使能自动调平】 0:禁止自动调平使能（XYZ结构中会自动变成半自动调平方式，youku搜索"赤兔主板——调平点配置"） 
-; 1:允许自动调平使能 
-; XYZ结构的自动调平，调平开关直接接在Z-上，去掉原来的限位开关，同时配合M8084 Z*指令使用
+; Enable auto-leveling.
+; 0: Disable (XYZ structure falls back to semi-automatic leveling mode)
+; 1: Allow auto-leveling
+; For XYZ structure: connect leveling switch directly to Z-, remove the original limit switch,
+; and use in conjunction with the M8084 Z* command.
 ;M8083 I1
 ; ==================================
-;【调平时，舵机收起时的角度，及放下的角度】，仅在支持了自动使能调平时才有效 
-;D后面接舵机收起的角度 ，P后接舵机放下的角度，如果两个角度相同，被视为不需要舵机支持
-;具体舵机能到的角度由具体的舵机决定，180旋转角舵机，我们实测的范围在-85-105度之间
-M8083 D0 P0 
+; Servo deployment/retraction angles for auto-leveling.
+; Only valid when auto-leveling is enabled.
+; D = servo retracted angle, P = servo deployed angle.
+; If both angles are equal, no servo support is assumed.
+; Achievable angles depend on the specific servo; for 180° rotation servos, measured range is approx. -85° to 105°.
+M8083 D0 P0
 
-M8083 C-45.0 R372.0 ;C后面接X轴左软限位位置参数 ，R后面接X轴右软限位位置参数
-
+M8083 C-45.0 R372.0 ; C = left software limit position of X axis, R = right software limit position of X axis
 
 ; ==================================
-;【Z调平限位差值，高级参数，可勿动】自动调平的XYZ机器上 Z调平限位的高度差 = 调平限位的Z位置 - Z零点位置      0:禁止偏移，Z的行程由
-; “设Z为零”确定 ,打印的gcode无需添加自动调平指令，推荐使用此模式            非0:Z的当前位置在调平限位触发时自动确定,DELTA结构下，
-; G29自动调平指令必须接在G28归零之后，打印指令之前。如果光电调平限位，通常是正值，如果限位时，挤出头贴主板，则为负值
+; Z leveling limit offset — advanced parameter, do not change.
+; Height difference of Z leveling limit = Z position at leveling trigger - Z zero position.
+; 0: No offset. Z travel set by "Set Z to zero". G-code does not need auto-leveling commands. Recommended.
+; Non-zero: Z position determined automatically when leveling limit triggers. For DELTA structure,
+; G29 auto-leveling must follow G28 homing and precede all print commands.
+; Positive value typical for optical sensors; negative if nozzle presses against the mainboard at trigger.
 M8084 Z0.15
 ; ==================================
 ;
-;【开机LOGO时间】
-;开机logo持续时间，最小100ms,最大6000ms
-M8085 I3000 
+; Boot logo display duration. Minimum 100ms, maximum 6000ms.
+M8085 I3000
 ; ==================================
 ;
-;【屏保时间】
-;待机多长时间会进入屏保界面，单位是秒(s),当为0时表示禁止屏保
-M8085 T0 
+; Screensaver timeout. Time before screensaver activates, in seconds (s).
+; 0 = screensaver disabled.
+M8085 T0
 ; ==================================
-;【待机关机功能，需配合打完关机功能模块】
-;待机多长时间会关闭机器，这个功能只有安装了打完关机功能模块的设置才能使用些设置，
-;单位是秒(s),为0时表示禁止待机关机功能
-M8085 P0 
+; Standby auto-shutdown. Requires shutdown-after-print hardware module.
+; Time before machine shuts down, in seconds (s).
+; 0 = standby shutdown disabled.
+M8085 P0
 ; ==================================
-;【软件分频,此值勿动】
-;软件分频，有些用户使用的是0.9步距角的电机或是外接32细分的驱动，
-;希望达到1.8步距角或是16细分的效果，可以将分频设为2，默认为1,不分频
-M8086 I1 
-; ==================================
-;
-;电机参数设置,S后面参数代表驱动电流，驱动电流建议在200到1500mA（最高2000mA）,超过1000mA 请加上散热风扇。
-;------X电机电流配置 S后面为驱动电流，单位为毫安mA-------
-M8091 I0 S650 P3 D3 C5 R6 F5 T0			;------电机Y参数配置 S后面为驱动电流，单位为毫安mA-------
+; Software microstepping divisor — do not change.
+; For users with 0.9° step angle motors or external 32-subdivision drivers
+; who want to emulate 1.8° / 16-subdivision behavior: set to 2. Default = 1 (no division).
+M8086 I1
 ; ==================================
 ;
-;
-;------Y电机电流配置 S后面为驱动电流，单位为毫安mA-------
-M8091 I1 S650 P3 D3 C5 R6 F5 T0			;------电机Y参数配置 S后面为驱动电流，单位为毫安mA-------
+; Motor current settings. S = driver current in mA. Recommended range: 200–1500mA (max 2000mA).
+; Add a cooling fan if exceeding 1000mA.
+; ------ X motor current — S = driver current in mA ------
+M8091 I0 S650 P3 D3 C5 R6 F5 T0
 ; ==================================
 ;
-;
-;------Z电机电流配置 S后面为驱动电流，单位为毫安mA-------
-M8091 I2 S325 P3 D3 C5 R6 F5 T0			;------电机Y参数配置 S后面为驱动电流，单位为毫安mA-------
+; ------ Y motor current — S = driver current in mA ------
+M8091 I1 S650 P3 D3 C5 R6 F5 T0
 ; ==================================
 ;
-;
-;------E电机电流配置 S后面为驱动电流，单位为毫安mA-------
-M8091 I3 S650 P3 D3 C5 R6 F5 T0			;------电机Y参数配置 S后面为驱动电流，单位为毫安mA-------
+; ------ Z motor current — S = driver current in mA ------
+M8091 I2 S325 P3 D3 C5 R6 F5 T0
 ; ==================================
 ;
-;
-;------E2电机电流配置 S后面为驱动电流，单位为毫安mA-------
-M8091 I4 S650 P3 D3 C5 R6 F5 T0			;------电机Y参数配置 S后面为驱动电流，单位为毫安mA-------
+; ------ E motor current — S = driver current in mA ------
+M8091 I3 S650 P3 D3 C5 R6 F5 T0
 ; ==================================
 ;
-;
-;------EXT电机电流配置 S后面为驱动电流，单位为毫安mA-------
-M8091 I5 S800 P3 D3 C5 R6 F5 T0			;------电机Y参数配置 S后面为驱动电流，单位为毫安mA-------
+; ------ E2 motor current — S = driver current in mA ------
+M8091 I4 S650 P3 D3 C5 R6 F5 T0
 ; ==================================
 ;
+; ------ EXT motor current — S = driver current in mA ------
+M8091 I5 S800 P3 D3 C5 R6 F5 T0
+; ==================================
 ;
-;------Z2电机电流配置 S后面为驱动电流，单位为毫安mA-------
-M8091 I6 S325 P3 D3 C5 R6 F5 T0			;------电机Y参数配置 S后面为驱动电流，单位为毫安mA-------
+; ------ Z2 motor current — S = driver current in mA ------
+M8091 I6 S325 P3 D3 C5 R6 F5 T0
 ; ==================================
 
 M8092 I0
-;【主板风扇自启时的pwm比例】
-;主板风扇自启时的pwm比例，最高是256,有些主板风扇的风力比较强，噪音比较大，
-;可以通过这个参数改变风扇风力及噪音
+; Mainboard fan auto-start PWM ratio. Maximum is 256.
+; Some mainboard fans are loud at full power — reduce this value to lower fan speed and noise.
 M8489 I230
 ; ==================================
-;【耗材的界面出丝速度】
-;在耗材的界面中，装载耗材的进丝速度 ,单位是mm/s,
-;进丝速度过快，无法及时送丝，导致挤出机挤不动而失步
+; Filament interface extrusion speed (mm/s).
+; If too fast, the feeder cannot keep up, causing under-extrusion and lost steps.
 M8489 T2
 ; ==================================
-;【打印完成后的动作】 打印完成后动作      0：关闭所有电机，加热 
-;1：打印完后不动作，完全听从gcode指令 		2: 打印完成后，归零，电机不断电
-;3: 打印完成后降到Z的最大行程处，电机不断电	4: 打印完成后等待喷头1温度降到50度才提醒打印完成
+; Action after print completes.
+; 0: Turn off all motors and heaters
+; 1: No action — follow G-code instructions entirely
+; 2: Home all axes after printing, keep motors powered
+; 3: Drop to maximum Z travel after printing, keep motors powered
+; 4: Wait until nozzle 1 cools to 50°C before signaling print complete
 M8489 P0
 ; ==================================
-;【温度的PID参数设置】	【M301 P18 I1.08 D98 】
-;如果你不是专家，并且你的当前温度控制比较稳定，可以不需要动这个参数
-;配置前，请在前面的框内打勾
+; Temperature PID parameters. [Reference: M301 P18 I1.08 D98]
+; If your temperature control is stable and you are not an expert, leave this alone.
+; Tick the box in front before configuring.
 M301 P10.9 I0.22 D180
 M302 P10.9 I0.22 D180
 ; ==================================
-; 
-;1: 支持激光雕刻的相关配置 
-;0：不支持激光雕刻的相关配置,相关功能是在more按钮里面设置速度
-M8520 I0 
+;
+; 1: Enable laser engraving configuration
+; 0: Disable — laser speed is set via the "More" button
+M8520 I0
 ; ==================================
-;【热腔初始温度设置】
+; Initial heated enclosure temperature setting.
 M8525 I80
 ;
-
-;【热腔温度功率不足，或加热传感器未工作的弹窗警告开关】
-;1：开启弹窗
-;0：关闭弹窗
+; Popup warning for insufficient heating power or non-functional temperature sensor.
+; 1: Enable warning    0: Disable warning
 M8525 T1
 
 ; ==================================
 
-
-;1 开启断料检测显示
-;0 关闭断料检测显示
+; 1: Enable filament runout detection display
+; 0: Disable filament runout detection display
 M8528 I1
 
-M8100 D-9.5  ;归零后X坐标
-M8100 P0  ;归零后Y坐标
+M8100 D-9.5  ; X coordinate after homing
+M8100 P0     ; Y coordinate after homing
 
- M8529 I255 T255
- ;I 喷头1 MB_FAN的PWM频率设置
- ;T 喷头2 MB_FAN的PWM频率设置
+M8529 I255 T255
+; I = MB_FAN PWM frequency for extruder 1
+; T = MB_FAN PWM frequency for extruder 2
 
- M8101 D3 P25
- ;D 温度变化检测时间间隔（每3S检测一次温度是否变化）
- ;P 温度报警检测总时长（25S没加热到热床40度，喷头140报警）
+M8101 D3 P25
+; D = temperature change detection interval (checks every 3 seconds)
+; P = total temperature warning duration (alarm if bed doesn't reach 40°C or nozzle 140°C within 25 seconds)
 
-M304 P71.039 I2.223 D567.421  ;热床温度PID参数
-M8600 I1 		;1开启热床PID，0关闭热床PID 
+M304 P71.039 I2.223 D567.421  ; Heated bed temperature PID parameters
+M8600 I1  ; 1 = enable bed PID, 0 = disable bed PID
 
- M8530  I1 ;暂停时关闭喷头温度，
- ;为1时暂停会关闭，为0暂停不会关闭
+M8530 I1  ; Extruder temperature during pause: 1 = lower temp on pause, 0 = keep temp on pause
 
-;【【【【【【【【【保存参数】】】】】】】】此参数一定不能少，否则参数无法保存到设备
-;保存配置
-
+; SAVE PARAMETERS — mandatory. Without this, no settings are saved to the device.
 M8500
 
 M7507 I1 T0

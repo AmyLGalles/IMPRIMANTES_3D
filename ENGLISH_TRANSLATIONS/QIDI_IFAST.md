@@ -1,36 +1,36 @@
-**24_08_2024**
+**08/24/2024**
 
-J'ai recement fait l'acquisition d'une imprimante de marque QIDI modéle IFAST avec une tête dual pour pouvoir imprimer mes piéces du PETG et les supports dans une matiere differente (PLA / PVA) qui n'hadére pas au PETG.
- 
- Une imprimante dite "dual" est différent d'une "IDEX" qui posséde deux têtes totalement indépandantes, capables de travailler simultanément, en mirroir en clone...
+I recently acquired a QIDI brand printer, model IFAST, with a dual head in order to print my parts in PETG and the supports in a different material (PLA / PVA) that does not adhere to PETG.
 
-Les deux extrudeurs de la QIDI IFAST sont montés sur une unique tête et sont alternativement sortis / retractés selon le besoin via une came lorsque la tête arrive en buté gauche / droite. 
+A so-called "dual" printer is different from an "IDEX" which has two fully independent heads capable of working simultaneously — in mirror mode, clone mode, etc.
 
-Exemple : Si la tête arrive en buté gauche la tête Z2 situé à main gauche est abaissée à proximité du plateau afin de pouvoir imprimmer alors que la tête de droite z1 est elle est retactée.
+The two extruders on the QIDI IFAST are mounted on a single head and are alternately lowered/retracted as needed via a cam mechanism when the head reaches the left/right end stop.
 
-J'utilise uniquement le sclicer Ideamaker pour convertir mes fichiers STL. Celui-ci identifie les têtes de gauche à droite comme T0,T1 ... ce qui n'est pas sans posser des pb avec la numerotation de QUIDI.
+Example: If the head reaches the left end stop, the Z2 head on the left side is lowered close to the bed for printing, while the right head Z1 is retracted.
+
+I use only the Ideamaker slicer to convert my STL files. It identifies heads from left to right as T0, T1 — which creates some issues with QIDI's own numbering convention.
 
 
-**QUIDI IFAST avec Firmware Marlin modifié par QIDI; certaines fonctions gcodes sont diferentes voir la section [Firmware de la QUIDI IFAST ](https://github.com/sudtek/IMPRIMANTES_3D/tree/235f8ea74b5f1439434741d732e151d05a6209f9/QIDI/IFAST/Firmware)**
+**QIDI IFAST running Marlin firmware modified by QIDI; some G-code functions differ — see the [QIDI IFAST Firmware](https://github.com/sudtek/IMPRIMANTES_3D/tree/235f8ea74b5f1439434741d732e151d05a6209f9/QIDI/IFAST/Firmware) section**
 
-| Localisation Extrudeur | Gauche | Droite |
-|------------------------|--------|--------|
-| Identification QIDI    | Z2     | Z1     |
-| Identification Ideamaker| T0     | T1     |
-| Localisation           | Gauche | Droite |
-| Impression              | Corps  | Supports |
-| Matière à extruder      | PETG   | PLA     |
-| Température extrudeurs (°C) | 235    | 205    |
-| Température Bed (°C)    | 70   | 70      |
-| Température enceinte (°C) | 55     | 55       |
+| Extruder Location        | Left   | Right    |
+|--------------------------|--------|----------|
+| QIDI ID                  | Z2     | Z1       |
+| Ideamaker ID             | T0     | T1       |
+| Location                 | Left   | Right    |
+| Role                     | Body   | Supports |
+| Material                 | PETG   | PLA      |
+| Extruder temp (°C)       | 235    | 205      |
+| Bed temp (°C)            | 70     | 70       |
+| Enclosure temp (°C)      | 55     | 55       |
 
-- Localisation  : Par convention lorsque l'on fait face à l'imprimante.
-- Température extrudeurs (°C) : Par defaut ces températures donneront un bon resultat mais il faudra toujours calibrer vos bobines.
-- Température Bed (°C)  : Toujours prevoir un filme de colle blanche pour assurer l'hadérence et limiter le warp et faciliter le retrait par spatulage.
-- Température enceinte (°C) : Ne pas dépasser les 55°c sinon les supports / radeaux / jupes en PLA vont fondre et se deformer l'idéal est d'utiliser un pla+ 
-- Note 1 : Aucune ventilation de l'impression en cours car cela fait warp le PETG
-- Note 2 : A la fin de l'impression il est conseillé de faire via un gcode de baisser la temperature progressivement par palier pour eviter le warping du PETG.
+- Location: By convention, when facing the printer.
+- Extruder temp (°C): These temperatures will give good results by default, but you should always calibrate for your specific spools.
+- Bed temp (°C): Always apply a layer of white glue stick to ensure adhesion, limit warping, and make removal easier with a spatula.
+- Enclosure temp (°C): Do not exceed 55°C — otherwise PLA supports/rafts/skirts will melt and deform. Ideally use PLA+.
+- Note 1: No part cooling fan during printing, as it causes PETG to warp.
+- Note 2: At the end of a print it is recommended to use a G-code sequence to gradually lower the temperature in steps to avoid PETG warping.
 
-**Mes observation :** Jai rapidement pu consater que les objets imprimés avec ma QIDI IFAST à 1500€ etaient bien moins précis que sur ma vielle X1 300€ calibrée ... La  QIDI Ifast est une imprimante technique qui necesite imperativement une calibration complexe de bout en bout il est impossible de se contenter des réglages par defaut d'usine. J'ai donc decidé de consigner mes périgrinations, methodes, informations, gcode, profils ideamakers et autres galéres ... pour aider les autres utilisateurs qui possédent une QIDI IFAST à tirer le meilleur parti de leur machine. J'ai pris contact avec le support QIDI qui est certes réactif et amical mais qui reste selon moi trop supperficiel sur certains points ... manque de documentation et finition logiciels ... 
+**My observations:** I quickly noticed that objects printed on my QIDI IFAST at €1,500 were significantly less precise than those from my old calibrated X1 at €300. The QIDI IFAST is a technical printer that absolutely requires thorough end-to-end calibration — it is impossible to get by with the factory default settings. I therefore decided to document my wanderings, methods, information, G-code, Ideamaker profiles, and other struggles — to help other QIDI IFAST users get the most out of their machine. I contacted QIDI support, which is responsive and friendly, but in my opinion remains too superficial on certain points — lacking documentation and software polish.
 
-**ATTENTION :** Les gcodes de cette catégorie sont trés specifiques aux imprimantex QIDI IFAST !! Vous pouvez vous en inspirer mais si vous avez un autre modele il faudra imperativement les adapter. J'ai pour habitude de documenter mafin que cela soit explicite néanmoins je vous recommande de toujours les relire et verifier avant de vous lancer.
+**WARNING:** The G-codes in this section are very specific to the QIDI IFAST printer! You may use them as inspiration, but if you have a different model you will absolutely need to adapt them. I make a habit of documenting things so they are explicit — nonetheless I recommend always reading through and verifying them before you proceed.

@@ -1,15 +1,14 @@
-26_08_2024
+08/26/2024
 
-Par défaut les bobines de filament tierce se bloquent dans le support de bobine des QIDI ifast car l'axe est étroit c'est problématique, du coup j'ai réalisé un adaptateur les bobines des marques : 
+By default, third-party filament spools get stuck in the QIDI IFAST spool holder because the axle is too narrow — this is a problem, so I designed an adapter for spools from the following brands:
 
-| Marque de Bobine | Din mm | Dout mm |
-|-------|--------|---------|
-| SUNLU | | |
-| noname | | |
+| Spool Brand | Din mm | Dout mm |
+|-------------|--------|---------|
+| SUNLU       |        |         |
+| noname      |        |         |
 
-Je vous recommande de les imprimer en PETG avec 3 coques et 50% pour une bonne durabilité.
+I recommend printing them in PETG with 3 shells and 50% infill for good durability.
 
-Il vous faudra suprimmer les 4 ergots du couvercle transparent des supports de bobine QUIDI qui maintiennent les bobines centrées car avec cet adapteur cela n'est plus nécesaire.
+You will need to remove the 4 tabs on the transparent lid of the QIDI spool holders that keep the spools centered, as these are no longer necessary with this adapter.
 
-J'utilise principalement du filamant Sunlu et du noname. Si vous avez reéalisé un adaptateur de bobine pour la QIDI IFAST et que vous soulez uploader ici vous êtes le bienvenu 
-
+I mainly use Sunlu and noname filament. If you have designed a spool adapter for the QIDI IFAST and would like to upload it here, you are welcome to do so.

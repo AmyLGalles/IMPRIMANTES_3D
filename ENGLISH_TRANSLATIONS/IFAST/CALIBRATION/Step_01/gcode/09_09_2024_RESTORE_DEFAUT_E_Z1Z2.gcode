@@ -1,17 +1,16 @@
-; 09_septembre_2024
-; QIDI Ifast
-; Restorer les valeurs E de chaque moteur pas à pas des extrudeurs Z1 & Z2
-; Valueurs par defaut S = P 0.0073
+; 09_September_2024
+; QIDI IFAST
+; Restore factory default E steps/mm values for each extruder stepper motor Z1 & Z2
+; Default values: S = P = 0.0073
 ;
-; QIDI IFAST : T0 = buse de droite = Z1 = S
-; QIDI IFAST : T1 = buse de gauche = Z2 = P
+; QIDI IFAST: T0 = right nozzle = Z1 = S
+; QIDI IFAST: T1 = left nozzle  = Z2 = P
 ;
-; Valeurs par defaut de  S0.0073 et  P0.0073
+; Factory default values: S0.0073 and P0.0073
 M8011 S0.0073 P0.0073
 ;
-; [ Sauvegarder les paramètres ]
-; Indispensable, sinon les paramètres ne seront pas sauvegardés
-; Sauvegarder la configuration
+; [ Save parameters ]
+; Mandatory — without this, no settings are saved to the device.
 M8500
 ;
-; Faire un reboot de l'imprimante.
+; Reboot the printer.

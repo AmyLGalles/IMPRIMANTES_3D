@@ -1,41 +1,42 @@
-Ce qu'il va falloir faire ....
+What needs to be done....
 
 <s>
-;//FAIT
-; A faire Fixer avant la temperature de la buse et attendre X minutes
-; exemple : ideal extruding length is 100mm,but actually it flew out 93mm.
-; So the correct e step should be 93*0.0073/100,it is 0.006789
-;//FAIT
+;//DONE
+; To do: Set before the nozzle temperature and wait X minutes
+; example : ideal extruding length is 100mm, but actually it flew out 93mm.
+; So the correct e step should be 93*0.0073/100, it is 0.006789
+;//DONE
 </s>
 ;
-;Bloc 1 : Pour régler indépendamment les paramètres des moteurs pas-à-pas XY, utilisez cette commande (cochez la case dans le cadre ci-dessus).
+;Block 1: To independently adjust the stepper motor parameters for XY, use this command (check the box in the frame above).
 M8009 X0.010625 Y0.010625
 
-;Bloc 2 : La valeur en mm de chaque pas est calculée à l'aide de la formule suivante : pas (360/18)*16. Le pas est la distance que la plate-forme monte lorsque la vis tourne d'un tour.
+;Block 2: The mm value of each step is calculated using the following formula: step (360/18)*16. The step is the distance the platform rises when the screw turns one full revolution.
 M8010 S0.0025
 
 **
 ;
-;Bloc 3 : La valeur en mm de chaque pas est égale à la circonférence de la roue d'entraînement d'extrusion divisée par 3200.
-;         Si vous avez un dispositif de réduction, divisez également par le rapport de réduction. Si vous constatez que le filament est extrudé de manière trop lâche, ou... 
-          Une nouvelle suggestion est de rendre cette valeur légèrement inférieure à la valeur réelle, l'extrusion sera meilleure.
+;Block 3: The mm value of each step equals the circumference of the extrusion drive wheel divided by 3200.
+;         If you have a reduction device, also divide by the reduction ratio. If you find that the filament is being extruded too loosely, or...
+          A new suggestion is to make this value slightly lower than the actual value — extrusion will be better.
 ;M8011 S0.0073 P0.0073
 ;M8011 S0.0067 P0.0067
 ;**
 
-;Bloc 4 : Vitesse maximale pour les mouvements XY en mm/s. Afin d'assurer la stabilité de la machine, veuillez régler cette valeur en fonction des résultats de vos tests.
+;Block 4: Maximum speed for XY movements in mm/s. To ensure machine stability, please adjust this value based on your test results.
 M8012 1200
 
-Bloc 5 : Vitesse maximale pour les mouvements Z en mm/s.
+Block 5: Maximum speed for Z movements in mm/s.
 M8013 110
 
-;Bloc 6 : Vitesse maximale de l'extrudeur en mm/s.
+;Block 6: Maximum extruder speed in mm/s.
 M8014 1120
- 
-;Bloc 7 : La première vitesse de homing de l'axe Z. La vitesse est relativement rapide. Le logiciel de découpage MakerWare ignorera cette vitesse de homing car le G-code qu'il génère spécifie une vitesse de homing.
-Explications supplémentaires (basées sur les commentaires)
-* Paramètres des moteurs pas-à-pas: Les commandes M8009 et M8010 permettent de régler la précision des mouvements des axes X et Y en fonction des caractéristiques des moteurs et de la vis mère.
-* Calcul du pas: Le commentaire explique comment calculer le pas de l'axe Z en fonction du pas de la vis mère. Cette valeur est essentielle pour une extrusion précise du filament.
-* Vitesse d'extrusion: La commande M8011 et le commentaire associé concernent la vitesse maximale à laquelle le filament peut être extrudé. Une valeur trop élevée peut entraîner des problèmes d'adhérence ou de sous-extrusion.
-* Vitesses maximales: Les commandes M8012, M8013 et M8014 définissent les vitesses maximales pour les mouvements des axes X, Y et Z, ainsi que pour l'extrusion. Ces valeurs doivent être ajustées en fonction des capacités de la machine et du matériau utilisé.
-* Homing de l'axe Z: Le dernier commentaire mentionne que la vitesse de homing de l'axe Z peut être ignorée par certains logiciels de découpage, car ils spécifient leur propre vitesse dans le G-code généré.
+
+;Block 7: The first homing speed of the Z axis. The speed is relatively fast. The MakerWare slicing software will ignore this homing speed because the G-code it generates specifies its own homing speed.
+
+Additional notes (based on comments)
+* Stepper motor parameters: The M8009 and M8010 commands adjust the movement precision of the X and Y axes based on the motor and lead screw characteristics.
+* Step calculation: The comment explains how to calculate the Z axis step based on the lead screw pitch. This value is essential for accurate filament extrusion.
+* Extrusion speed: The M8011 command and its associated comment relate to the maximum speed at which filament can be extruded. Too high a value can cause adhesion issues or under-extrusion.
+* Maximum speeds: The M8012, M8013, and M8014 commands define the maximum speeds for X, Y, and Z axis movements as well as extrusion. These values should be adjusted based on the machine's capabilities and the material being used.
+* Z axis homing: The last comment notes that the Z axis homing speed may be ignored by some slicing software, as they specify their own speed in the generated G-code.

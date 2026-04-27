@@ -1,27 +1,26 @@
-; 09_septembre_2024
+; 09_September_2024
 ; QIDI IFAST
-; Procedure de sauvegarde des nouvelles valeurs E de chaque moteur pas à pas des extrudeurs Z1 & Z2
-; Voir https://github.com/sudtek/IMPRIMANTES_3D/blob/main/QIDI/IFAST/CALIBRATION/Etape%2001/Etape_01.md
+; Procedure to save new E steps/mm values for each extruder stepper motor Z1 & Z2
+; See https://github.com/sudtek/IMPRIMANTES_3D/blob/main/QIDI/IFAST/CALIBRATION/Etape%2001/Etape_01.md
 ;
-; QIDI IFAST : T0 = buse de droite = Z1 = S
-; QIDI IFAST : T1 = buse de gauche = Z2 = P
+; QIDI IFAST: T0 = right nozzle = Z1 = S
+; QIDI IFAST: T1 = left nozzle  = Z2 = P
 ;
-; Terminer l'étap 01 de calibration : 
-; #1 Changer les valeurs de S et de P avec vos valeurs 
-; #2 Imprimer ce gcode sur la QIDI IFAST pour sauvegarder les valeurs
-; #3 Faites un reboot de la QIDI IFAST
+; To complete calibration step 01:
+; #1 Replace the S and P values below with your own calculated values
+; #2 Print this G-code on the QIDI IFAST to save the values
+; #3 Reboot the QIDI IFAST
 ;
-; Valeurs par defaut de  S0.0073 et  P0.0073
+; Factory default values: S0.0073 and P0.0073
 ; P -> Z2 -> T1
 ; S -> Z1 -> T0
 ;
-; Saisir les nouvelles valeurs ci-dessous :
+; Enter new values below:
 ;
 M8011 S0.0069 P0.0069
 ;
-; [ Sauvegarder les paramètres ]
-; Indispensable, sinon les paramètres ne seront pas sauvegardés sur l'appareil
-; Sauvegarder la configuration
+; [ Save parameters ]
+; Mandatory — without this, no settings are saved to the device.
 M8500
 ;
-; Faire un reboot de l'imprimante !
+; Reboot the printer!

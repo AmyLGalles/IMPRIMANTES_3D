@@ -1,18 +1,18 @@
-; 09_09_2024 
+; 09_09_2024
 ; QIDI IFAST
-; Procedure de verification de la valeur E des moteurs pas à pas des extrudeurs
+; Verification procedure for the E steps/mm values of the extruder stepper motors
 
-; Extrudeur situé à main gauche Z2 T1 sur QIDI IFAST
-; - PETG 235°c
-; - 100% de debit
-; - Longueur de calibrage 100mm
+; Left extruder Z2 T1 on QIDI IFAST
+; - PETG 235°C
+; - 100% flow rate
+; - Calibration length 100mm
 
-; Extrudeur situé à main droite Z1 T0 sur QIDI IFAST
-; - PLA 205°c
-; - 100% de debit
-; - Longueur de calibrage 100mm
+; Right extruder Z1 T0 on QIDI IFAST
+; - PLA 205°C
+; - 100% flow rate
+; - Calibration length 100mm
 
-; Firmware: Basé sur Marlin (ce n'est pas un pur Marlin)
+; Firmware: Marlin-based (not pure Marlin)
 ; Custom Toolhead: T1 T0
 
 ; ----------------------------------------------------
@@ -21,56 +21,56 @@
 ; ----------------------------------------------------
 
 ; ----------------------------------------------------
-; Fixe les Débits d'écoulement à 100% des deux buses
+; Set flow rate to 100% for both nozzles
 M221 T1 S100.00
 M221 T0 S100.00
 ; ----------------------------------------------------
 
 ; ----------------------------------------------------
-; Debut de sequence de Homming
+; Begin homing sequence
 G28
-; Deplacement pour homing en position (0,0) vitesse 3600
+; Move to home position (0,0) at speed 3600
 G0 X0 Y0 F3600
 ; ----------------------------------------------------
 
 ; ----------------------------------------------------
-; Fixer la temperature des deux buses
+; Set temperature for both nozzles
 
-; Buse de gauche Z2 alias T1 pour du PETG à 235°c 
+; Left nozzle Z2 alias T1 for PETG at 235°C
 M109 T1 S235
 
-; Buse de droite Z1 alias T0 pour du PLA à 205°c
+; Right nozzle Z1 alias T0 for PLA at 205°C
 M109 T0 S205
 
-; Note : M109 attend que la temperature de consigne soit atteinte avant de continuer -> ne pas remplacer par M104
+; Note: M109 waits for the target temperature to be reached before continuing → do not replace with M104
 ; ----------------------------------------------------
 
 ; ----------------------------------------------------
-; Extrudeur Z2 (main gauche) alias T1 filament PETG
+; Extruder Z2 (left) alias T1 — PETG filament
 T1
 
-; Pas de ventilation de la buse / No fan
+; No nozzle fan
 M107
 
-; Fixe la nouvelle position de l'extruder E <pos> E0 = initialisation
+; Set extruder E position — E0 = initialization
 ;G92 E0
 G1 X330 E0 F2400
 
-; Extrude 100mm de filament à vitesse constante maximum ente le debut et la fin d'extrusion de 125
+; Extrude 100mm of filament at constant speed — max feed rate between start and end of extrusion: 125
 G1 E100 F125
 ; ------------------------------------------------
 
 ; ------------------------------------------------
-; Extrudeur Z1 (main droite) alias T0
+; Extruder Z1 (right) alias T0
 T0
 
-; Pas de ventilation de la buse / No fan
+; No nozzle fan
 M107
 
-; Fixe la nouvelle position de l'extruder E <pos> E0 = initialisation
+; Set extruder E position — E0 = initialization
 ;G92 E0
 G1 X330 E0 F2400
 
-; On extrude 100mm de filament à vitesse constante maximum ente le debut et la fin d'extrusion de 125
+; Extrude 100mm of filament at constant speed — max feed rate between start and end of extrusion: 125
 G1 E100 F125
 ; ------------------------------------------------
