@@ -78,8 +78,8 @@ FILAMENT_Z2_GAUCHE_DIAMETRE = FILAMENTS_DIAMETRE_DEFAUT  # 1.75mm
 FILAMENT_Z2_GAUCHE_TEMPERATURE = 235 # 235°c 
 FILAMENT_Z2_GAUCHE_DEBIT = 100.00 # !!!! oujours à 100% par defaut ne pas toucher !!!
 FILAMENT_Z2_GAUCHE_TYPE = "PETG"
-FILAMENT_Z2_GAUCHE_COULEUR = "Blanc" 
-FILAMENT_Z2_GAUCHE_NOM =  IMPRIMANTE3D_MARQUE + "-" + IMPRIMANTE3D_MODELE + " " + FILAMENT_Z2_GAUCHE_TYPE + " " + FILAMENT_Z2_GAUCHE_COULEUR # Ex :  QIDI-IFAST PETG BLanc
+FILAMENT_Z2_GAUCHE_COULEUR = "White" 
+FILAMENT_Z2_GAUCHE_NOM =  IMPRIMANTE3D_MARQUE + "-" + IMPRIMANTE3D_MODELE + " " + FILAMENT_Z2_GAUCHE_TYPE + " " + FILAMENT_Z2_GAUCHE_COULEUR # Ex :  QIDI-IFAST PETG White
 FILAMENT_Z2_GAUCHE_DENSITE = 1240.00 # densité ? ou module de young ? necesite une question ?
 FILAMENT_Z2_GAUCHE_MARQUE =  "SUNLU"  # Votre marque par defaut
 
@@ -201,13 +201,13 @@ print(f"Materiaux du filament sur Z1 : {FILAMENT_Z1_DROITE_TYPE}")
 
 # Demander à l'utilisateur de spécifier la matière du filament sur Z1
 while True:
-    FZ1_couleur = input("\n Q6 / 16 -> Buse Z1 (DROITE) Veuillez spécifier la couleur du filament exemple Blanc, Mauve, ... : ")
+    FZ1_couleur = input("\n Q6 / 16 -> Buse Z1 (DROITE) Veuillez spécifier la couleur du filament exemple White, Mauve, ... : ")
     if (FZ1_couleur == "") : break # charge la valeur par defaut -> Mauve
     if not (FZ1_couleur == "") : 
         FILAMENT_Z1_DROITE_COULEUR = FZ1_couleur
         break
     else :
-        print("Valeur invalide. Veuillez spécifier la couleur du filament exemple Blanc, Mauve, ...  ! ")
+        print("Valeur invalide. Veuillez spécifier la couleur du filament exemple White, Mauve, ...  ! ")
 print(f"Couleur du materiaux du filament sur Z1 : {FILAMENT_Z1_DROITE_COULEUR}")
 
 
@@ -266,13 +266,13 @@ print(f"Materiaux du filament sur Z2 : {FILAMENT_Z2_GAUCHE_TYPE}")
 
 # Demander à l'utilisateur de spécifier la matière du filament sur Z2
 while True:
-    FZ2_couleur = input("\n Q11 / 16 -> Buse Z2 (GAUCHE) Veuillez spécifier la couleur du filament ex Blanc, Mauve (OBLIGATOIRE) : ")
+    FZ2_couleur = input("\n Q11 / 16 -> Buse Z2 (GAUCHE) Veuillez spécifier la couleur du filament ex White, Mauve (OBLIGATOIRE) : ")
     if (FZ2_couleur == "") : break # charge la valeur par defaut -> Mauve
     if not (FZ2_couleur == "") : 
         FILAMENT_Z2_GAUCHE_COULEUR = FZ2_couleur
         break
     else :
-        print("Valeur invalide. Veuillez spécifier la couleur du filament ex Blanc, Mauve, ...  !")
+        print("Valeur invalide. Veuillez spécifier la couleur du filament ex White, Mauve, ...  !")
 print(f"Couleur du materiaux du filament sur Z2 : {FILAMENT_Z2_GAUCHE_COULEUR}")
 
 # Demander à l'utilisateur de spécifier la marque du filament sur Z2
@@ -301,17 +301,17 @@ print(f"Température du plateau {PLATEAU_TEMPERATURE} °c pour imprimer du {FILA
 # -------------------------------------------------------------------------------------------------------------------------
 
 
-# Demander à l'utilisateur de spécifier la température de l'enceinte pour imprimer un filament via Z2
+# Demander à l'utilisateur de spécifier la Chamber Temperature pour imprimer un filament via Z2
 # Note : Pour se prémunir des flucuations hivernales / estivales des temperatures ambiantes il est préferable de toujours imprimer à une temperature minimum de 40°c
 while True:
-    enceinte_temperature = input(f"\n Q14 / 16 -> Veuillez spécifier la température de l'enceinte [{ENCEINTE_TEMPERATURE_BMIN_DEFAUT} .. {ENCEINTE_TEMPERATURE_BMAX_DEFAUT} ]°c ATTENTION dépend du filament à caractériser (défaut {ENCEINTE_TEMPERATURE} °c) (OBLIGATOIRE) : ")
+    enceinte_temperature = input(f"\n Q14 / 16 -> Veuillez spécifier la Chamber Temperature [{ENCEINTE_TEMPERATURE_BMIN_DEFAUT} .. {ENCEINTE_TEMPERATURE_BMAX_DEFAUT} ]°c ATTENTION dépend du filament à caractériser (défaut {ENCEINTE_TEMPERATURE} °c) (OBLIGATOIRE) : ")
     if (enceinte_temperature == "") : break # charge la valeur par defaut 40°c
     if (int(enceinte_temperature) >= 0) and (int(enceinte_temperature) <= 130) : 
         ENCEINTE_TEMPERATURE = int(enceinte_temperature)
         break
     else :
         print(f"Valeur invalide. Veuillez entrer une température entre [ {ENCEINTE_TEMPERATURE_BMIN_DEFAUT} .. {ENCEINTE_TEMPERATURE_BMAX_DEFAUT} ]°c !")
-print(f"Température de l'enceinte {ENCEINTE_TEMPERATURE} °c pour imprimer du {FILAMENT_Z2_GAUCHE_TYPE} {FILAMENT_Z2_GAUCHE_COULEUR} à {FILAMENT_Z2_GAUCHE_TEMPERATURE} °c !")
+print(f"Chamber Temperature {ENCEINTE_TEMPERATURE} °c pour imprimer du {FILAMENT_Z2_GAUCHE_TYPE} {FILAMENT_Z2_GAUCHE_COULEUR} à {FILAMENT_Z2_GAUCHE_TEMPERATURE} °c !")
 # -------------------------------------------------------------------------------------------------------------------------
 
 
@@ -352,7 +352,7 @@ print(f"- 11 cubes étiquetés de A ( débit : {CUBE_A_DEBIT} % ) à K ( débit 
 print(f"- Légende plateau A à K debit : {LEGENDE_DEBIT} %")
 print(f"- Tour de purge débit : {TOUR_DEBIT} %")
 print(f"- Température du plateau : {PLATEAU_TEMPERATURE} °c")
-print(f"- Température de l'enceinte : {ENCEINTE_TEMPERATURE} °c")
+print(f"- Chamber Temperature : {ENCEINTE_TEMPERATURE} °c")
 
 resume() #  continuer ou quiter ?
 
@@ -363,7 +363,7 @@ resume() #  continuer ou quiter ?
 
 
 # Génerer un nom automatique de fichier de sortie
-# Exemple du format du nom explicite de fichier : 31_10_2024_Z2_Calibration_[100%..90%]_Pas_1%_PETG_BLANC_SUNLU_235°c_1.724mm
+# Exemple du format du nom explicite de fichier : 31_10_2024_Z2_Calibration_[100%..90%]_Pas_1%_PETG_White_SUNLU_235°c_1.724mm
 
 MAINTENANT = datetime.now()
 DATE_JOUR = MAINTENANT.strftime("%d_%m_%Y_")
@@ -432,7 +432,7 @@ M109 T0 S205
 # BLOC_TEMPERATURE_ENCEINTE
 # NBoccurence = 1
 bloc_temperature_enceinte = f"""
-;On fixe la temperature de l'enceinte {ENCEINTE_TEMPERATURE} degres celsius
+;The temperature of the chamber is set to {ENCEINTE_TEMPERATURE} degrees celsius
 M141 S{ENCEINTE_TEMPERATURE}
 """
 # --------------------

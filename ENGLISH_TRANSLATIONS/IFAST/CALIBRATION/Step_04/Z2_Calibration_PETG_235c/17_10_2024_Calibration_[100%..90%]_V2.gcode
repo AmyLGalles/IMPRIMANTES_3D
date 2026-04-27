@@ -10,9 +10,9 @@
 ;Filament Compensation #2: 100.00
 ;Filament Density #1: 1240.00
 ;Filament Density #2: 1240.00
-;Filament Type #1: PETG blanc
+;Filament Type #1: PETG White
 ;Filament Type #2: PLA
-;Filament Name #1: IFAST PETG BLANC SUNLU calibration Dimensions + Epaisseur
+;Filament Name #1: IFAST PETG White SUNLU calibration Dimensions + Epaisseur
 ;Filament Name #2: IFAST PLA ROUGE
 ;Firmware: Marlin
 ;Bounding Box: 28.179 301.775 75.190 183.160 0.000 20.000
@@ -35,9 +35,9 @@ G0 X330 Y4 F3600
 G1 X5 E0 F2400
 ; Température de l'enciente
 ; Attention au temperature du PLA  !
-; On fixe la temperature de l'enceinte à 50°C
+; The temperature of the chamber is set to à 50°C
 ;M141 S50
-; On fixe la temperature de l'enceinte à 40°C
+; The temperature of the chamber is set to à 40°C
 M141 S40
 M107
 M1001

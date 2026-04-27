@@ -18,7 +18,7 @@ Filament_Z2_T0_Gauche_Diametre = 1.724 # Obligatoire
 Filament_Z2_T0_Gauche_Temperature = 235
 Filament_Z2_T0_Gauche_Compensation = 100
 Filament_Z2_T0_Gauche_Type = "PETG"
-Filament_Z2_T0_Gauche_Name = "QIDI-IFAST PETG Blanc"
+Filament_Z2_T0_Gauche_Name = "QIDI-IFAST PETG White"
 
 # On part du principe qu'il y n'y a toujours 11 cubes 20x20x20 creux disposés sur 1 ligne selon l'axe X (format 11C x 1L)
 # les cubes sont ordonnées de gauche à droite par ordre decroissant la legende etant amenée à varier il est plus judicieux 
@@ -50,9 +50,9 @@ Pas = 1  # pas intercube ne peut prendre que deux valeurs 0.1 ou 1
 ;Filament Diameter #2: 1.740
 ;Filament Compensation #1: 100.00
 ;Filament Compensation #2: 100.00
-;Filament Type #1: PETG blanc
+;Filament Type #1: PETG White
 ;Filament Type #2: PLA
-;Filament Name #1: IFAST PETG BLANC SUNLU calibration Dimensions + Epaisseur
+;Filament Name #1: IFAST PETG White SUNLU calibration Dimensions + Epaisseur
 ;Filament Name #2: IFAST PLA ROUGE
 """
 
@@ -78,7 +78,7 @@ M109 T0 S205
 # LIGNE_40_41
 # NBoccurence = 1
 """
-; On fixe la temperature de l'enceinte à 40°C
+; The temperature of the chamber is set to à 40°C
 M141 S40
 """
 

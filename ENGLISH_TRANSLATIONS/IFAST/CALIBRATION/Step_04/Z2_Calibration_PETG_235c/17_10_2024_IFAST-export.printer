@@ -79,7 +79,7 @@
         "machine_fan_control": true,
         "machine_filament_1": 42,
         "machine_filament_2": 43,
-        "machine_filament_name_1": "Sidewinder X1 - PETG blanc_1.70-copy",
+        "machine_filament_name_1": "Sidewinder X1 - PETG White_1.70-copy",
         "machine_filament_name_2": "PLA 1.75mm-copy",
         "machine_firmware_retraction": false,
         "machine_firmware_type": "Marlin",

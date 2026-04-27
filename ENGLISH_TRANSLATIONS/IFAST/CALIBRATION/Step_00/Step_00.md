@@ -11,7 +11,7 @@ Note : Le gcode integré à l'interface de l'imprimante va automatiquement fixer
 
 P2) Charger deux bobines bien séches et désydratés (le PLA absorbe l'eau) donc prevoir 24 heures de désydration.
 
-P3) Les couleurs des bobines doivent être contrastés exemple une Rouge et une Blanche. Ne pas utiliser de couleur noir ou sombre car il n'y aura pas de contraste avec le bed et la lecture sera dificile -> uniquement des couleurs vives.
+P3) Les couleurs des bobines doivent être contrastés exemple une Rouge et une Whitehe. Ne pas utiliser de couleur noir ou sombre car il n'y aura pas de contraste avec le bed et la lecture sera dificile -> uniquement des couleurs vives.
 
 P4) Nettoyer soigneusement le bed avec une microfibre et un savon neutre / shampoing premier prix.
 
