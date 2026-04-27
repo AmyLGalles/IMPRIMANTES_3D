@@ -48,7 +48,7 @@ Sunlu PETG with a theoretical diameter of 1.75mm ±0.2mm — measured with the f
 VS
 
 Sunlu PETG with a theoretical diameter of 1.75mm ±0.2mm — measured with the narrow jaw gives an average diameter of 1.744mm
-![](https://github.com/sudtek/IMPRIMANTES_3D/blob/1949d0320007ef1ac88599cf782de5bff678bacf/QIDI/IFAST/CALIBRATION/Etape%2003/media/Exemple_Mes_mesures_Diametre_filament_PETG_Z2_bec_Fin_NOK.png)
+![](https://github.com/sudtek/IMPRIMANTES_3D/blob/1949d0320007ef1ac88599cf782de5bff678bacf/QIDI/IFAST/CALIBRATION/Etape%2003/media/Exemple_Mes_mesures_Diametre_filament_PETG_Z2_bec_END_NOK.png)
 
 We will use the first series with Daverage = 1.724mm. In order to calculate the flow rate factor percentage, this value must be set in the slicer.
 
