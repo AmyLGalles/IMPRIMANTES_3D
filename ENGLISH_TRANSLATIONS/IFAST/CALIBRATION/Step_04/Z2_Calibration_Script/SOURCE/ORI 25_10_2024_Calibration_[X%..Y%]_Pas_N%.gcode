@@ -37,7 +37,7 @@ G1 X5 E0 F2400
 ; PLA Temperature Warning  !
 ; The temperature of the chamber is set to à 50°C
 ;M141 S50
-; The temperature of the chamber is set to à 40°C
+; The temperature of the chamber is set to 40°C
 M141 S40
 M107
 M1001
