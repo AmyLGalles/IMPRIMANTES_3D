@@ -1,3 +1,5 @@
+This project is a fork of IMPRIMANTES_3D, maintained by [sudtek].
+
 # IMPRIMANTES_3D
 
 24 août 2024
