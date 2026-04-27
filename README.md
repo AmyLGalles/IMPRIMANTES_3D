@@ -1,4 +1,4 @@
-This project is a fork of IMPRIMANTES_3D, maintained by [sudtek].
+This project is a fork of IMPRIMANTES_3D, maintained by @sudtek.
 
 # IMPRIMANTES_3D
 
