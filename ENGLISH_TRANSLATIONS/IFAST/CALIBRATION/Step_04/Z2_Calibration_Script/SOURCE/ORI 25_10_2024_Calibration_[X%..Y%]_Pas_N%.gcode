@@ -12,8 +12,8 @@
 ;Filament Density #2: 1240.00
 ;Filament Type #1: PETG White
 ;Filament Type #2: PLA
-;Filament Name #1: IFAST PETG White SUNLU calibration Dimensions + Epaisseur
-;Filament Name #2: IFAST PLA ROUGE
+;Filament Name #1: IFAST PETG White SUNLU calibration Dimensions + Thickness
+;Filament Name #2: IFAST PLA Red
 ;Firmware: Marlin
 ;Bounding Box: 28.179 301.775 86.527 182.565 0.000 20.000
 ;Model Gap: 0.000
@@ -33,8 +33,8 @@ T0
 G92 E-19
 G0 X330 Y4 F3600
 G1 X5 E0 F2400
-; Température de l'enciente
-; Attention au temperature du PLA  !
+; Enclosure Temperature
+; PLA Temperature Warning  !
 ; The temperature of the chamber is set to à 50°C
 ;M141 S50
 ; The temperature of the chamber is set to à 40°C

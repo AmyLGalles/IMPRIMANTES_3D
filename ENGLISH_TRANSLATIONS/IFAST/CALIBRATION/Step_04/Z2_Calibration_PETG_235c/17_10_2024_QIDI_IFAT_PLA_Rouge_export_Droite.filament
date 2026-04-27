@@ -9,10 +9,10 @@
         "filament_color": "#FF0000",
         "filament_density": 1240,
         "filament_diameter": 1.74,
-        "filament_display_name": "IFAST PLA ROUGE",
+        "filament_display_name": "IFAST PLA Red",
         "filament_flowrate": 100,
         "filament_gcode_end": "",
-        "filament_gcode_start": "; Température de l'enciente\n; The temperature of the chamber is set to à 40°C\nM141 S40",
+        "filament_gcode_start": "; Enclosure Temperature\n; The temperature of the chamber is set to à 40°C\nM141 S40",
         "filament_name_abbreviation": "PLA",
         "filament_notes": "#1 ATTENTION : Sur Ideamakers et autres sliccers  les têtes sont nommées par convention de gauche à droite T0 est la tête de Gauche (Z2 sur la IFAST). T1 est la tête de Droite (Z1 sur la IFAST). Ce qui est l'inverse du choix de nommage de QIDI ! On ne peut pas se contenter d'inverser les etiquettes dans ideamaker pour la  QIDI Ifast  sinon la QIDI interprete mal le gcode et IDEAMAKER est inutilisable :\n- T1 doit être affecté à l'extrudeur de gauche\n- T0 doit être affecté à l'extrudeur de droite \n\nIl est donc obligatoire de faire un post processus dans le template pour swapper à aprés génération du  gcode en post procesus final les etiquettes des têtes !\n\n#2 Temperature enceinte à fixer via M141 S50 pour 50°c via le gcode personalisé de la tête gauche \n\nNote 1: \nPETG avec support PLA : Il faut fixer les temperatures du plateau pour le plus exigent le PETG  65°c\n\nIMPORTANT : Seul le filament principal sur la tête localisé à gauche doit outrepasseer les parametres !\nSI les deux tetes outrepassent cela cafouille !",
         "filament_price": 13
