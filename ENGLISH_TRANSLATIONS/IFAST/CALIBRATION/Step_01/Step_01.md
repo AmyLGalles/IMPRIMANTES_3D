@@ -37,7 +37,7 @@ Summary of parameters for the extruder stepper motor calibration procedure on my
 | Calibration length   | 100mm  | 100mm  |
 ```
 
-My calibration G-code file [03_09_2024_RAZ_extrude_100mm.gcode](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode/03_09_2024_RAZ_extrude_100mm.gcode) will extrude 100mm of filament from each head in sequence at the appropriate temperatures for PETG and PLA.
+My calibration G-code file [03_09_2024_RAZ_extrude_100mm.gcode](https://github.com/AmyLGalles/IMPRIMANTES_3D/blob/main/ENGLISH_TRANSLATIONS/IFAST/CALIBRATION/Step_01/gcode/03_09_2024_RAZ_extrude_100mm.gcode) will extrude 100mm of filament from each head in sequence at the appropriate temperatures for PETG and PLA.
 
 If you want to calibrate your printer with other filaments or combinations (PLA/PLA, PETG/ABS, etc.), **you will need to download the G-code file and adapt the temperatures to match the material you have chosen to extrude**. Example modification for PLA on both Z1 and Z2 at 205°C:
 
@@ -67,7 +67,7 @@ P4) Using a ruler or caliper, precisely measure 100mm on each filament and mark 
 
 P5) Manually set the preheat temperatures for the filaments — in my case Z2 to 235°C and Z1 to 205°C. Although my G-code handles this and waits for the target temperatures to be reached before proceeding, developing this habit will one day prevent you from accidentally extruding at too low a temperature and damaging a nozzle.
 
-P6) Run the G-code [03_09_2024_RAZ_extrude_100mm.gcode](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode/03_09_2024_RAZ_extrude_100mm.gcode). Z2 and Z1 will heat up and each extrude approximately 100mm in turn.
+P6) Run the G-code [03_09_2024_RAZ_extrude_100mm.gcode](https://github.com/AmyLGalles/IMPRIMANTES_3D/blob/main/ENGLISH_TRANSLATIONS/IFAST/CALIBRATION/Step_01/gcode/03_09_2024_RAZ_extrude_100mm.gcode). Z2 and Z1 will heat up and each extrude approximately 100mm in turn.
 
 P7) Measure the distance between the reference zero (the uninserted collar) on the head and the first mark for Z2, then repeat for Z1.
 
@@ -98,7 +98,7 @@ If the first 100mm mark is below the collar, the simplest fix is to reset to fac
 
 M8011 S0.0073 P0.0073
 ```
-Download the file [09_09_2024_RESTORE_DEFAUT_E_Z1Z2.gcode](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode/09_09_2024_RESTORE_DEFAUT_E_Z1Z2.gcode)
+Download the file [09_09_2024_RESTORE_DEFAUT_E_Z1Z2.gcode](https://github.com/AmyLGalles/IMPRIMANTES_3D/blob/main/ENGLISH_TRANSLATIONS/IFAST/CALIBRATION/Step_01/gcode/09_09_2024_RESTORE_DEFAUT_E_Z1Z2.gcode)
 
 Run the G-code, reboot the printer, and return to step P04.
 
@@ -114,7 +114,7 @@ To replace and save the new steps/mm values for E on your Z1 and Z2, copy the fo
 
 M8011 S0.0068 P0.0070
 ```
-Download the file [09_09_2024_SAV_NEW_E_Z1Z2.gcode](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode/09_09_2024_SAV_NEW_E_Z1Z2.gcode)
+Download the file [09_09_2024_SAV_NEW_E_Z1Z2.gcode](https://github.com/AmyLGalles/IMPRIMANTES_3D/blob/main/ENGLISH_TRANSLATIONS/IFAST/CALIBRATION/Step_01/gcode/09_09_2024_SAV_NEW_E_Z1Z2.gcode)
 
 -----------------
 
@@ -124,11 +124,11 @@ After updating:
 
 - Restart / reboot your IFAST.
 
-- Verify that the new S & P values result in correct 100mm extrusion from both nozzles using: [09_09_2024_VERIF_Z1Z2_extruder_100mm.gcode](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode/09_09_2024_VERIF_Z1Z2_extruder_100mm.gcode)
+- Verify that the new S & P values result in correct 100mm extrusion from both nozzles using: [09_09_2024_VERIF_Z1Z2_extruder_100mm.gcode](https://github.com/AmyLGalles/IMPRIMANTES_3D/blob/main/ENGLISH_TRANSLATIONS/IFAST/CALIBRATION/Step_01/gcode/09_09_2024_VERIF_Z1Z2_extruder_100mm.gcode)
 - If after extrusion the first 100mm mark lines up with the collar, your machine's extrusion is perfectly calibrated for both nozzles and this step is fully complete.
 
 -----------------
 
-All E calibration G-code files are available [here](https://github.com/sudtek/IMPRIMANTES_3D/blob/572e1f38047cff27d3ebf05762a64709f86ebc43/QIDI/IFAST/CALIBRATION/Etape%2001/gcode).
+All E calibration G-code files are available [here](https://github.com/AmyLGalles/IMPRIMANTES_3D/blob/main/ENGLISH_TRANSLATIONS/IFAST/CALIBRATION/Step_01/gcode).
 
 _Note #1: Important for IdeaMaker users — the IdeaMaker printer profile includes a variable named **step E / mm = 0.00**. By default it is set to 0.00. If you change this value, IdeaMaker will override your calibration and apply that value to both extruder motors — so make sure this variable is set to 0.00 in your IdeaMaker printer profile: **step E / mm = 0.00**. This variable is only acceptable if you have a single extruder motor E._
