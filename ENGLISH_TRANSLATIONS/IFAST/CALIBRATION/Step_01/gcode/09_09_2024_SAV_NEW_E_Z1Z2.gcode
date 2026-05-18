@@ -17,7 +17,7 @@
 ;
 ; Enter new values below:
 ;
-M8011 S0.0072 P0.0072
+M8011 S0.00678 P0.00678
 ;
 ; [ Save parameters ]
 ; Mandatory — without this, no settings are saved to the device.
